@@ -10,28 +10,15 @@ namespace ACREA
 {
     public static class Model
     {
-        private static Dictionary<int, string> GetStatusDict()
-        {
-            return new Dictionary<int, string>()
-            {
-                { 1, "Начат" },
-                { 2, "В Ремонте" },
-                { 3, "Диагностика" },
-                { 4, "Ожидание запчастей" },
-                { 5, "Отказ" },
-                { 6, "Завершен" }
 
-            };
-        }
-        public static void DbIsExist()
-        {
-            //if (File.Exists("acrea.db"))
-            //    return;
-            //else
-            //    //DataBase.CreateDataBase(GetStatusDict());
-            DataBaseContext.CreateDB("acrea.db");
 
+        //public static async void InsertStatuses() => await DataBaseContext.InsertStatuses(GetStatusDict()); 
+        public async static void DbIsExist(string dbPath = "acrea.db")
+        {
+            if(!File.Exists(dbPath))
+                await DataBaseContext.CreateDB(dbPath);
         }
+
         public static Dictionary<int, string> GetPartTypeDict(List<PartType> partTypes)
         {
             Dictionary<int, string> getPartTypeDict = new Dictionary<int, string>();

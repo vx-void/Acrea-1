@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace DB
 {
     public class Client
     {
-        
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int Phone { get; set; }
         public string Name { get; set; }
@@ -17,12 +14,21 @@ namespace DB
 
     public class ComponentType
     {
+        public ComponentType(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
     }
 
     public class Component
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
         public int Type { get; set; }
@@ -34,6 +40,13 @@ namespace DB
 
     public class Order
     {
+        public Order()
+        {
+            ComponentOrders = new List<ComponentOrder>();
+        }
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public double DateStart { get; set; }
         public double? DateDeadline { get; set; }
@@ -48,6 +61,8 @@ namespace DB
 
     public class ComponentOrder
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderId { get; set; }
         public int ComponentId { get; set; }
         public int Count { get; set; }
@@ -57,7 +72,15 @@ namespace DB
 
     public class Status
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public Status(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }

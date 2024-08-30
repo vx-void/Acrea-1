@@ -1,8 +1,12 @@
 ﻿using System;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Serilog;
 //using Microsoft.Data.Sqlite;
-
+using System.Diagnostics;
+using System.Security.Policy;
+using System.Xml.Linq;
 
 namespace DB
 {
@@ -188,44 +192,62 @@ namespace DB
     //}
     public static class DataBaseContext
     {
-        public static void CreateDB(string dbPath)
+        public static async Task CreateDB(string dbPath)
         {
-            if (!File.Exists(dbPath))
-                File.Create(dbPath);
-            var options = new DbContextOptionsBuilder<AcreaContext>()
-                     .UseSqlite($"Data Source={dbPath.ToString()}")
-                     .Options;
-
-            using (var context = new AcreaContext(options))
+            using (StreamWriter logStream = new StreamWriter("dblog.txt", true))
             {
-                context.Database.EnsureCreated(); // Создает базу данных, если она не существует
+                var options = new DbContextOptionsBuilder<AcreaContext>()
+                         .UseSqlite($"Data Source={dbPath.ToString()};")
+                         .LogTo(logStream.WriteLine)
+                         .Options;
+
+                using (var context = new AcreaContext(options))
+                {
+                    await context.Database.EnsureCreatedAsync();
+                    foreach (var item in DbConst.statusDict)
+                        {
+                            var status = new Status(item.Key, item.Value);
+                            context.Status.Add(status);
+                            context.SaveChanges();
+                        }
+                        foreach (var item in DbConst.componentTypeDict)
+                        {
+                            var componentType = new ComponentType(item.Key, item.Value);
+                            context.ComponentTypes.Add(componentType);
+                            context.SaveChanges();
+                        }
+                        
+                    
+                }
             }
         }
+
+        
     }
-  
     public class AcreaContext : DbContext
     {
         public AcreaContext(DbContextOptions<AcreaContext> options) : base(options)
         {
-            //Database.SetInitializer<AcreaContext>(new CreateDatabaseIfNotExists<AcreaContext>());
+            
         }
-
 
         public DbSet<Client> Clients { get; set; }
         public DbSet<ComponentType> ComponentTypes { get; set; }
         public DbSet<Component> Components { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<ComponentOrder> ComponentOrders { get; set; }
+        public DbSet<Status> Status { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Client>()
                 .HasKey(c => c.Id);
 
             modelBuilder.Entity<Client>()
                 .Property(c => c.Id)
-                .HasColumnType("int")
+                .HasColumnType("INTEGER")
                 .IsRequired();
 
             modelBuilder.Entity<ComponentType>()
@@ -259,11 +281,17 @@ namespace DB
                 .HasOne(co => co.Component)
                 .WithMany()
                 .HasForeignKey(co => co.ComponentId);
+
+            modelBuilder.Entity<Status>()
+                .HasKey(e => e.Id);
+            modelBuilder.Entity<Status>()
+                .Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(100);
         }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=mydatabase.db");
         }
 
         

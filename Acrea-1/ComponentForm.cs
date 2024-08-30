@@ -1,26 +1,28 @@
-﻿using System;
+﻿using DB;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace ACREA
 {
-    public partial class Part : Form
+    public partial class ComponentForm : Form
     {
         private ComponentPart ComponentPart { get; set; }
-        private Dictionary<int, string> partType;
+        private Dictionary<int, string> ComponentType { get; set; }
         private ComponentPart oldPart;
 
-        public Part(string actionButtonText, ComponentPart component) : this(actionButtonText)
+        public ComponentForm(string actionButtonText, ComponentPart component) : this(actionButtonText)
         {
             this.ComponentPart = component;
         }
 
-        public Part(string actionButtonText)
+        public ComponentForm(string actionButtonText)
         {
             InitializeComponent();
             actionButton.Text = !string.IsNullOrWhiteSpace(actionButtonText)
                                 ? actionButtonText
                                 : string.Empty;
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -28,14 +30,16 @@ namespace ACREA
             this.Close();
         }
 
-        private void Part_Load(object sender, EventArgs e)
+        private async void Part_Load(object sender, EventArgs e)
         {
-            
+            ComponentType = await Model.GetComponentTypeFromDB();
+
+
             //partType = Model.GetPartTypeDict(DB.DataBase.GetPartTypeList());
-            //componentTypeComboBox.DataSource = new BindingSource(partType, null);
-            //componentTypeComboBox.DisplayMember = "Value";
-            //componentTypeComboBox.ValueMember = "Key";
-            //componentTypeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            componentTypeComboBox.DataSource = new BindingSource(ComponentType, null);
+            componentTypeComboBox.DisplayMember = "Value";
+            componentTypeComboBox.ValueMember = "Key";
+            componentTypeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
             //if (ComponentPart != null)
             //{                
@@ -45,7 +49,7 @@ namespace ACREA
             //    textBox4.Text = ComponentPart.GetPrice().ToString();
             //    oldPart = GetOldComponentPart();
             //}
-            
+
         }
 
         private void actionButton_Click(object sender, EventArgs e)

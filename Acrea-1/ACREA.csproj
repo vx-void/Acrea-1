@@ -34,7 +34,7 @@
     <Compile Update="Order.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Part.cs">
+    <Compile Update="ComponentForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

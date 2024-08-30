@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace DB
 {
     public static class DbConst
     {
+        public static string db = "acrea.db";
+
         public static Dictionary<int, string > statusDict = new Dictionary<int, string>()
             {
                 { 1, "Начат" },
@@ -50,5 +53,8 @@ namespace DB
             { 27, "Дисплей OLED" }
         };
 
+        public static DbContextOptions<AcreaContext> context = new DbContextOptionsBuilder<AcreaContext>()
+                         .UseSqlite($"Data Source={db.ToString()};")
+                         .Options;
     }
 }

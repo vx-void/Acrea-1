@@ -49,7 +49,7 @@ namespace ACREA
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Part part = new Part("Добавить");
+            ComponentForm part = new ComponentForm("Добавить");
             part.ShowDialog();
             //dataGridView1.DataSource = DB.DataBase.GetDataTable(DB.SqlQueries.selectPart);
         }

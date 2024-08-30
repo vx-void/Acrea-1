@@ -190,40 +190,7 @@ namespace DB
     //        }
     //    }
     //}
-    public static class DataBaseContext
-    {
-        public static async Task CreateDB(string dbPath)
-        {
-            using (StreamWriter logStream = new StreamWriter("dblog.txt", true))
-            {
-                var options = new DbContextOptionsBuilder<AcreaContext>()
-                         .UseSqlite($"Data Source={dbPath.ToString()};")
-                         .LogTo(logStream.WriteLine)
-                         .Options;
-
-                using (var context = new AcreaContext(options))
-                {
-                    await context.Database.EnsureCreatedAsync();
-                    foreach (var item in DbConst.statusDict)
-                        {
-                            var status = new Status(item.Key, item.Value);
-                            context.Status.Add(status);
-                            context.SaveChanges();
-                        }
-                        foreach (var item in DbConst.componentTypeDict)
-                        {
-                            var componentType = new ComponentType(item.Key, item.Value);
-                            context.ComponentTypes.Add(componentType);
-                            context.SaveChanges();
-                        }
-                        
-                    
-                }
-            }
-        }
-
-        
-    }
+ 
     public class AcreaContext : DbContext
     {
         public AcreaContext(DbContextOptions<AcreaContext> options) : base(options)
@@ -288,6 +255,8 @@ namespace DB
                 .Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100);
+           
+
         }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

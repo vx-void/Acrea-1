@@ -1,7 +1,7 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
+﻿using System;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Data.Sqlite;
+//using Microsoft.Data.Sqlite;
 
 
 namespace DB
@@ -192,21 +192,22 @@ namespace DB
         {
             if (!File.Exists(dbPath))
                 File.Create(dbPath);
-            
+            var options = new DbContextOptionsBuilder<AcreaContext>()
+                     .UseSqlite($"Data Source={dbPath.ToString()}")
+                     .Options;
 
-            using (var context = new AcreaContext(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dbPath)))
+            using (var context = new AcreaContext(options))
             {
-                context.Database.Initialize(true);
+                context.Database.EnsureCreated(); // Создает базу данных, если она не существует
             }
         }
     }
   
     public class AcreaContext : DbContext
     {
-        public AcreaContext(string connectionString) : base(connectionString)
+        public AcreaContext(DbContextOptions<AcreaContext> options) : base(options)
         {
-            Database.SetInitializer<AcreaContext>(new CreateDatabaseIfNotExists<AcreaContext>());
-            Database.Log = s => System.IO.File.AppendAllText("acrea-log.txt", s);
+            //Database.SetInitializer<AcreaContext>(new CreateDatabaseIfNotExists<AcreaContext>());
         }
 
 
@@ -216,12 +217,13 @@ namespace DB
         public DbSet<Order> Orders { get; set; }
         public DbSet<ComponentOrder> ComponentOrders { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             modelBuilder.Entity<Client>()
-                .HasKey(c => c.Id)
+                .HasKey(c => c.Id);
+
+            modelBuilder.Entity<Client>()
                 .Property(c => c.Id)
                 .HasColumnType("int")
                 .IsRequired();
@@ -230,28 +232,41 @@ namespace DB
                 .HasKey(ct => ct.Id);
 
             modelBuilder.Entity<Component>()
-                .HasKey(c => c.Id)
-                .HasRequired(c => c.CComponentType)
+                .HasKey(c => c.Id);
+
+            modelBuilder.Entity<Component>()
+                .HasOne(c => c.CComponentType)
                 .WithMany()
                 .HasForeignKey(c => c.Type);
 
             modelBuilder.Entity<Order>()
-                .HasKey(o => o.Id)
-                .HasRequired(o => o.OClient)
+                .HasKey(o => o.Id);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.OClient)
                 .WithMany()
                 .HasForeignKey(o => o.Client);
 
             modelBuilder.Entity<ComponentOrder>()
-                .HasKey(co => new { co.OrderId, co.ComponentId })
-                .HasRequired(co => co.Order)
+                .HasKey(co => new { co.OrderId, co.ComponentId });
+
+            modelBuilder.Entity<ComponentOrder>()
+                .HasOne(co => co.Order)
                 .WithMany(o => o.ComponentOrders)
                 .HasForeignKey(co => co.OrderId);
 
             modelBuilder.Entity<ComponentOrder>()
-                .HasRequired(co => co.Component)
+                .HasOne(co => co.Component)
                 .WithMany()
                 .HasForeignKey(co => co.ComponentId);
         }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Data Source=mydatabase.db");
+        }
+
+        
     }
 }
 

@@ -21,10 +21,6 @@ namespace ACREA
             
         }
 
-        public (int, string) GetPartInfo()
-        {
-            return (ID, Type);
-        }
 
         public string GetType() => this.Type;
 
@@ -54,10 +50,10 @@ namespace ACREA
 
         }
 
-        public (int, string, string, int, double) GetComponentPartInfo()
-        {
-            return (this.ID, this.Name, this.PType.GetPartInfo().Item2, this.Quantity, this.Price);
-        }
+        //public (int, string, string, int, double) GetComponentPartInfo()
+        //{
+        //    return (this.ID, this.Name, this.PType.GetPartInfo().Item2, this.Quantity, this.Price);
+        //}
 
         public void SetID(int id)
         {

@@ -73,6 +73,18 @@ namespace ACREA
                     await Model.InsertComponent(componentID, componentNameTextBox.Text.ToString(), componentType, int.Parse(componentCountTextBox.Text), double.Parse(componentPriceTextBox.Text));
                     break;
                 case "Редактировать":
+                    //TO DO 
+
+                    /*
+                     
+                    Вывести список запчастей
+                    +добавить запчасти
+                    удалить запчасти
+
+                     
+                     */
+
+
                     //DB.DataBase.UpdatePart(oldPart, newPart);
                     break;
             }

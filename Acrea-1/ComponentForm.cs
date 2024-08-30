@@ -22,7 +22,7 @@ namespace ACREA
             actionButton.Text = !string.IsNullOrWhiteSpace(actionButtonText)
                                 ? actionButtonText
                                 : string.Empty;
-            
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -52,7 +52,7 @@ namespace ACREA
 
         }
 
-        private void actionButton_Click(object sender, EventArgs e)
+        private async void actionButton_Click(object sender, EventArgs e)
         {
             //if (!ValidateInputs(out int quantity, out double price))
             //    return;
@@ -68,7 +68,9 @@ namespace ACREA
             switch (actionButton.Text)
             {
                 case "Добавить":
-                    //DB.DataBase.InsertPart(newPart);
+                    int componentID = await Model.SetComponentId() + 1;
+                    int componentType = await Model.GetComponentTypeID(componentTypeComboBox.Text.ToString());
+                    await Model.InsertComponent(componentID, componentNameTextBox.Text.ToString(), componentType, int.Parse(componentCountTextBox.Text), double.Parse(componentPriceTextBox.Text));
                     break;
                 case "Редактировать":
                     //DB.DataBase.UpdatePart(oldPart, newPart);
@@ -92,17 +94,22 @@ namespace ACREA
 
         private bool ValidateInputs(out int quantity, out double price)
         {
-            if (!int.TryParse(textBox2.Text, out quantity))
+            if (!int.TryParse(componentCountTextBox.Text, out quantity))
             {
                 price = 0;
                 return false;
             }
 
-            if (!double.TryParse(textBox4.Text, out price))
+            if (!double.TryParse(componentPriceTextBox.Text, out price))
             {
                 return false;
             }
             return true;
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -61,10 +61,9 @@ namespace ACREA
             }    
         }
 
-
         public static async Task<int> GetComponentTypeID(string name)
         {
-            int id = 0;
+            int id = 1;
             using(var context = new AcreaContext(DbConst.context))
             {
                 id = await context.ComponentTypes.Where(ct => ct.Name == name)
@@ -72,6 +71,12 @@ namespace ACREA
                     .FirstOrDefaultAsync();
             }
             return id;
+        }
+
+        public static async Task<int> SetComponentId()
+        {
+            using (var context = new AcreaContext(DbConst.context))
+                return await context.Components.CountAsync();
         }
 
         public static async Task<Dictionary<int, string>> GetComponentTypeFromDB()

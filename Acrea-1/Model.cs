@@ -8,6 +8,7 @@ using System.IO;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
 using System.ComponentModel;
+using System.Data;
 
 namespace ACREA
 {
@@ -41,26 +42,34 @@ namespace ACREA
             }
 
         }
-        public static async Task LoadComponentsToDataGridView(DataGridView dataGridView)
+        public static DataTable GetComponentsToDataTable()
         {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("Id", typeof(int));
+            dataTable.Columns.Add("Name", typeof(string));
+            dataTable.Columns.Add("Type", typeof(string));
+            dataTable.Columns.Add("Count", typeof(int));
+            dataTable.Columns.Add("Price", typeof(decimal));
+
             using (var context = new AcreaContext(DbConst.context))
             {
-                var components = await context.Components.ToListAsync();
 
-                dataGridView.Columns.Clear();
-
-                dataGridView.Columns.Add("Id", "ID");
-                dataGridView.Columns.Add("Name", "Название");
-                dataGridView.Columns.Add("Type", "Тип");
-                dataGridView.Columns.Add("Count", "Количество");
-                dataGridView.Columns.Add("Price", "Цена");
+                var components =context.Components.ToList();
 
                 foreach (var component in components)
                 {
-                    dataGridView.Rows.Add(component.Id, component.Name, component.Type, component.Count, component.Price);
+                    DataRow row = dataTable.NewRow();
+                    row["Id"] = component.Id;
+                    row["Name"] = component.Name;
+                    row["Type"] = component.Type;
+                    row["Count"] = component.Count;
+                    row["Price"] = component.Price;
+                    dataTable.Rows.Add(row);
                 }
             }
+            return dataTable;
         }
+
 
 
         public static async Task InsertComponent(int id, string name, int type, int count, double price)

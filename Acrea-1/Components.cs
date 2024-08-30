@@ -13,9 +13,27 @@ namespace ACREA
 {
     public partial class Components : Form
     {
+        private Dictionary<string, string> columnDict = new Dictionary<string, string>()
+        {
+            { "Id", "ID" },
+            { "Name", "Название" },
+            { "Type", "Тип" },
+            { "Count", "Количество" },
+            { "Price", "Цена" }
+        };
+
+
+        private void SetColumnName()
+        {
+            dataGridView1.Columns.Clear();
+            foreach (var item in columnDict)
+                dataGridView1.Columns.Add(item.Key, item.Value);
+        }
         public Components()
         {
             InitializeComponent();
+         //   SetColumnName();
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -51,12 +69,13 @@ namespace ACREA
         {
             ComponentForm part = new ComponentForm("Добавить");
             part.ShowDialog();
-            //dataGridView1.DataSource = DB.DataBase.GetDataTable(DB.SqlQueries.selectPart);
+            
         }
 
         private void Components_Load(object sender, EventArgs e)
         {
             //dataGridView1.DataSource = DB.DataBase.GetDataTable(DB.SqlQueries.selectPart);
+            dataGridView1.DataSource =  Model.GetComponentsToDataTable();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

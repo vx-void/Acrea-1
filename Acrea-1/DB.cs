@@ -129,68 +129,68 @@ namespace DB
     //            }
     //        }
     //    }
-    //    public static DataTable GetDataTable(string selectQuery)
+    //public static DataTable GetDataTable(string selectQuery)
+    //{
+    //    DataTable table = new DataTable();
+    //    using (var connect = new SQLiteConnection(connectionString))
     //    {
-    //        DataTable table = new DataTable();
-    //        //using (var connect = new SQLiteConnection(connectionString))
-    //        //{
-    //        //    connect.Open();
-    //        //    using (var command = new SQLiteCommand(selectQuery, connect))
-    //        //    {
-    //        //        using (var reader = command.ExecuteReader())
-    //        //        {
-    //        //            for (int i = 0; i < reader.FieldCount; i++)
-    //        //                table.Columns.Add(reader.GetName(i));
-    //        //            while (reader.Read())
-    //        //            {
-    //        //                DataRow row = table.NewRow();
-    //        //                for (int i = 0; i < reader.FieldCount; i++)
-    //        //                    row[i] = reader.GetValue(i);
-    //        //                table.Rows.Add(row);
-    //        //            }
-    //        //        }
-    //        //    }
-    //        //}
-    //        return table;
+    //        connect.Open();
+    //        using (var command = new SQLiteCommand(selectQuery, connect))
+    //        {
+    //            using (var reader = command.ExecuteReader())
+    //            {
+    //                for (int i = 0; i < reader.FieldCount; i++)
+    //                    table.Columns.Add(reader.GetName(i));
+    //                while (reader.Read())
+    //                {
+    //                    DataRow row = table.NewRow();
+    //                    for (int i = 0; i < reader.FieldCount; i++)
+    //                        row[i] = reader.GetValue(i);
+    //                    table.Rows.Add(row);
+    //                }
+    //            }
+    //        }
     //    }
+    //    return table;
+    ////    }
 
-    //    public static void InsertClient(string name, string phone)
-    //    {
-    //        using (var connect = new SQLiteConnection(connectionString))
-    //        {
-    //            connect.Open();
-    //            using (var command = new SQLiteCommand(string.Format(DB.SqlQueries.insertClient, name, phone), connect))
-    //            {
-    //                command.ExecuteNonQuery();
-    //            }
-    //        }
-    //    }
-    //    public static void UpdateClient(string name, string phone, string oldName, string oldPhone)
-    //    {
-    //        using (var connect = new SQLiteConnection(connectionString))
-    //        {
-    //            connect.Open();
-    //            using (var command = new SQLiteCommand(string.Format(DB.SqlQueries.updateClient, name, phone, oldName, oldPhone),
-    //                connect))
-    //            {
-    //                command.ExecuteNonQuery();
-    //            }
-    //        }
-    //    }
+        //    public static void InsertClient(string name, string phone)
+        //    {
+        //        using (var connect = new SQLiteConnection(connectionString))
+        //        {
+        //            connect.Open();
+        //            using (var command = new SQLiteCommand(string.Format(DB.SqlQueries.insertClient, name, phone), connect))
+        //            {
+        //                command.ExecuteNonQuery();
+        //            }
+        //        }
+        //    }
+        //    public static void UpdateClient(string name, string phone, string oldName, string oldPhone)
+        //    {
+        //        using (var connect = new SQLiteConnection(connectionString))
+        //        {
+        //            connect.Open();
+        //            using (var command = new SQLiteCommand(string.Format(DB.SqlQueries.updateClient, name, phone, oldName, oldPhone),
+        //                connect))
+        //            {
+        //                command.ExecuteNonQuery();
+        //            }
+        //        }
+        //    }
 
-    //    public static void DeleteClient(string name, string phone)
-    //    {
-    //        using (var connect = new SQLiteConnection(connectionString))
-    //        {
-    //            connect.Open();
-    //            using (var command = new SQLiteCommand(string.Format(DB.SqlQueries.deleteClient, name, phone), connect))
-    //            {
-    //                command.ExecuteNonQuery();
-    //            }
-    //        }
-    //    }
-    //}
- 
+        //    public static void DeleteClient(string name, string phone)
+        //    {
+        //        using (var connect = new SQLiteConnection(connectionString))
+        //        {
+        //            connect.Open();
+        //            using (var command = new SQLiteCommand(string.Format(DB.SqlQueries.deleteClient, name, phone), connect))
+        //            {
+        //                command.ExecuteNonQuery();
+        //            }
+        //        }
+        //    }
+        //}
+
     public class AcreaContext : DbContext
     {
         public AcreaContext(DbContextOptions<AcreaContext> options) : base(options)

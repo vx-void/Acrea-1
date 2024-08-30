@@ -14,14 +14,12 @@ namespace ACREA
     public static class Model
     {
 
-
         //public static async void InsertStatuses() => await DataBaseContext.InsertStatuses(GetStatusDict()); 
         public static async void DbIsExist()
         {
             if(!File.Exists(DbConst.db))
                 await CreateDB();
         }
-
         private static async Task CreateDB()
         {
             using (var context = new AcreaContext(DbConst.context))
@@ -43,6 +41,27 @@ namespace ACREA
             }
 
         }
+        public static async Task LoadComponentsToDataGridView(DataGridView dataGridView)
+        {
+            using (var context = new AcreaContext(DbConst.context))
+            {
+                var components = await context.Components.ToListAsync();
+
+                dataGridView.Columns.Clear();
+
+                dataGridView.Columns.Add("Id", "ID");
+                dataGridView.Columns.Add("Name", "Название");
+                dataGridView.Columns.Add("Type", "Тип");
+                dataGridView.Columns.Add("Count", "Количество");
+                dataGridView.Columns.Add("Price", "Цена");
+
+                foreach (var component in components)
+                {
+                    dataGridView.Rows.Add(component.Id, component.Name, component.Type, component.Count, component.Price);
+                }
+            }
+        }
+
 
         public static async Task InsertComponent(int id, string name, int type, int count, double price)
         {
@@ -61,6 +80,11 @@ namespace ACREA
             }    
         }
 
+        public static async Task UpdateComponent()
+        {
+            //TO DO
+        }
+
         public static async Task<int> GetComponentTypeID(string name)
         {
             int id = 1;
@@ -72,13 +96,11 @@ namespace ACREA
             }
             return id;
         }
-
         public static async Task<int> SetComponentId()
         {
             using (var context = new AcreaContext(DbConst.context))
                 return await context.Components.CountAsync();
         }
-
         public static async Task<Dictionary<int, string>> GetComponentTypeFromDB()
         {
             var context = new AcreaContext(DbConst.context);
@@ -93,6 +115,7 @@ namespace ACREA
             }
             return getPartTypeDict;
         }
+
 
      
     }

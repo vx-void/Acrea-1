@@ -8,7 +8,7 @@ namespace DB
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int Phone { get; set; }
+        public string Phone { get; set; }
         public string Name { get; set; }
     }
 
@@ -88,4 +88,5 @@ namespace DB
             Name = name;
         }
     }
+
 }

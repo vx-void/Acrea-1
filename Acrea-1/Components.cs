@@ -76,21 +76,18 @@ namespace ACREA
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private async void button4_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-            //    int selectedRowIndex = dataGridView1.SelectedRows[0].Index;
-            //    ComponentPart componentPart = new ComponentPart ()
-            //    {
-            //        Name = dataGridView1.Rows[selectedRowIndex].Cells[0].Value.ToString(),
-            //    };
-            //    var result = MessageBox.Show("Удалить выбранный компонент?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //    if (result == DialogResult.Yes)
-            //    {
-            //        DB.DataBase.DeletePart(componentPart.Name);
-            //    }
-            //    dataGridView1.DataSource = DB.DataBase.GetDataTable(DB.SqlQueries.selectPart);
+                 int selectedRowIndex = dataGridView1.SelectedRows[0].Index;
+                 selectedRowIndex++;   
+                 var result = MessageBox.Show("Удалить выбранный компонент?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    await Model.DeleteComponent(selectedRowIndex);
+                }
+                dataGridView1.DataSource = Model.GetComponentsToDataTable();
             }
         }
     }

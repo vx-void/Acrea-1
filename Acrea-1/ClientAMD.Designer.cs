@@ -28,82 +28,89 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.clientActionButton = new System.Windows.Forms.Button();
-            this.closeButton = new System.Windows.Forms.Button();
-            this.nameTextBox = new System.Windows.Forms.TextBox();
-            this.phoneTextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            clientActionButton = new Button();
+            closeButton = new Button();
+            nameTextBox = new TextBox();
+            phoneTextBox = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
+            SuspendLayout();
             // 
             // clientActionButton
             // 
-            this.clientActionButton.Location = new System.Drawing.Point(12, 138);
-            this.clientActionButton.Name = "clientActionButton";
-            this.clientActionButton.Size = new System.Drawing.Size(118, 23);
-            this.clientActionButton.TabIndex = 0;
-            this.clientActionButton.Text = "clientActionButton";
-            this.clientActionButton.UseVisualStyleBackColor = true;
-            this.clientActionButton.Click += new System.EventHandler(this.clientActionButton_Click);
+            clientActionButton.Location = new Point(14, 159);
+            clientActionButton.Margin = new Padding(4, 3, 4, 3);
+            clientActionButton.Name = "clientActionButton";
+            clientActionButton.Size = new Size(138, 27);
+            clientActionButton.TabIndex = 0;
+            clientActionButton.Text = "clientActionButton";
+            clientActionButton.UseVisualStyleBackColor = true;
+            clientActionButton.Click += clientActionButton_Click;
             // 
             // closeButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(257, 138);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(118, 23);
-            this.closeButton.TabIndex = 1;
-            this.closeButton.Text = "Закрыть";
-            this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            closeButton.Location = new Point(300, 159);
+            closeButton.Margin = new Padding(4, 3, 4, 3);
+            closeButton.Name = "closeButton";
+            closeButton.Size = new Size(138, 27);
+            closeButton.TabIndex = 1;
+            closeButton.Text = "Закрыть";
+            closeButton.UseVisualStyleBackColor = true;
+            closeButton.Click += closeButton_Click;
             // 
             // nameTextBox
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(64, 32);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(298, 20);
-            this.nameTextBox.TabIndex = 2;
+            nameTextBox.Location = new Point(75, 37);
+            nameTextBox.Margin = new Padding(4, 3, 4, 3);
+            nameTextBox.Name = "nameTextBox";
+            nameTextBox.Size = new Size(347, 23);
+            nameTextBox.TabIndex = 2;
             // 
             // phoneTextBox
             // 
-            this.phoneTextBox.Location = new System.Drawing.Point(141, 75);
-            this.phoneTextBox.Name = "phoneTextBox";
-            this.phoneTextBox.Size = new System.Drawing.Size(221, 20);
-            this.phoneTextBox.TabIndex = 3;
+            phoneTextBox.Location = new Point(164, 87);
+            phoneTextBox.Margin = new Padding(4, 3, 4, 3);
+            phoneTextBox.Name = "phoneTextBox";
+            phoneTextBox.Size = new Size(257, 23);
+            phoneTextBox.TabIndex = 3;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "ФИО";
+            label1.AutoSize = true;
+            label1.Location = new Point(14, 37);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(34, 15);
+            label1.TabIndex = 4;
+            label1.Text = "ФИО";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 78);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(114, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Контактный телефон";
+            label2.AutoSize = true;
+            label2.Location = new Point(14, 90);
+            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(123, 15);
+            label2.TabIndex = 5;
+            label2.Text = "Контактный телефон";
             // 
             // ClientAMD
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(387, 173);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.phoneTextBox);
-            this.Controls.Add(this.nameTextBox);
-            this.Controls.Add(this.closeButton);
-            this.Controls.Add(this.clientActionButton);
-            this.Name = "ClientAMD";
-            this.Text = "Информация о клиенте / заказчике";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(451, 200);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(phoneTextBox);
+            Controls.Add(nameTextBox);
+            Controls.Add(closeButton);
+            Controls.Add(clientActionButton);
+            Margin = new Padding(4, 3, 4, 3);
+            base.Name = "ClientAMD";
+            Text = "Информация о клиенте / заказчике";
+            Load += ClientAMD_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

@@ -12,13 +12,13 @@ namespace ACREA
 {
     public partial class ClientFrom : Form
     {
-        private string ClientName { get; set; }
+        private string Name { get; set; }
         private string Phone { get; set; }
 
         public ClientFrom()
         {
             InitializeComponent();
-            //dataGridView1.DataSource = DB.DataBase.GetDataTable(DB.SqlQueries.selectClient);
+            dataGridView1.DataSource = Model.GetClientDataTable();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -35,15 +35,13 @@ namespace ACREA
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {    
+        {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-
                 SetClientNameAndPhone();
-                ClientAMD form = new ClientAMD(button2.Text,ClientName, Phone );
+                ClientAMD form = new ClientAMD(button2.Text, Name, Phone);
                 form.ShowDialog();
-                
-                //dataGridView1.DataSource = DB.DataBase.GetDataTable(DB.SqlQueries.selectClient);
+                dataGridView1.DataSource = Model.GetClientDataTable(); 
             }
         }
 
@@ -60,23 +58,29 @@ namespace ACREA
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {            
+        private async void button3_Click(object sender, EventArgs e)
+        {
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 SetClientNameAndPhone();
+                int id = await Model.GetClientIdByPhone(Phone);
                 var result = MessageBox.Show("Вы хотите удалить клиента?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                //if (result == DialogResult.Yes)
-                    //DB.DataBase.DeleteClient(ClientName, Phone);
-                //dataGridView1.DataSource = DB.DataBase.GetDataTable(DB.SqlQueries.selectClient);
+                if (result == DialogResult.Yes)
+                    await Model.DeleteClient(id);
+                dataGridView1.DataSource = dataGridView1.DataSource = Model.GetClientDataTable();
             }
         }
 
         private void SetClientNameAndPhone()
         {
             int selectedRowIndex = dataGridView1.SelectedRows[0].Index;
-            this.ClientName = dataGridView1.Rows[selectedRowIndex].Cells[1].Value.ToString();
-            this.Phone = dataGridView1.Rows[selectedRowIndex].Cells[2].Value.ToString();
+            this.Name = dataGridView1.Rows[selectedRowIndex].Cells[0].Value.ToString();
+            this.Phone = dataGridView1.Rows[selectedRowIndex].Cells[1].Value.ToString();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

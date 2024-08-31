@@ -12,7 +12,7 @@ namespace ACREA
 {
     public partial class ClientAMD : Form
     {
-        private string ClientName { get; set; }
+        private string Name { get; set; }
         private string Phone { get; set; }
 
         public ClientAMD()
@@ -24,11 +24,11 @@ namespace ACREA
         {
             InitializeComponent();
             this.clientActionButton.Text = actionButtonText;
-            if(name != "" && phone != "")
+            if (name != "" && phone != "")
             {
-                this.ClientName = name;
-                this.Phone = phone;
-                nameTextBox.Text = ClientName.ToString();
+                this.Name = name;
+                this.Phone = Model.GetPhoneNumberFormat(phone);
+                nameTextBox.Text = Name.ToString();
                 phoneTextBox.Text = Phone.ToString();
             }
         }
@@ -38,14 +38,15 @@ namespace ACREA
             this.Close();
         }
 
-        private void clientActionButton_Click(object sender, EventArgs e)
+        private async void clientActionButton_Click(object sender, EventArgs e)
         {
             switch (clientActionButton.Text)
             {
                 case "Создать":
-                    this.ClientName = nameTextBox.Text.ToString();
+                    this.Name = nameTextBox.Text.ToString();
                     this.Phone = phoneTextBox.Text.ToString();
-                    //DB.DataBase.InsertClient(ClientName, Phone);
+                    var id = await Model.SetClientId();
+                    await Model.InsertClient(id, Name, Phone);
                     break;
                 case "Редактировать":
                     var result = MessageBox.Show("Редактировать информацию о клиенте?", "Информация о клиенте", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -55,6 +56,11 @@ namespace ACREA
 
             }
             this.Close();
+        }
+
+        private void ClientAMD_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

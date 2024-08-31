@@ -2,7 +2,6 @@
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Serilog;
 //using Microsoft.Data.Sqlite;
 using System.Diagnostics;
 using System.Security.Policy;
@@ -227,6 +226,7 @@ namespace DB
                 .HasOne(c => c.CComponentType)
                 .WithMany()
                 .HasForeignKey(c => c.Type);
+           
 
             modelBuilder.Entity<Order>()
                 .HasKey(o => o.Id);

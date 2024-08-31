@@ -35,6 +35,7 @@ namespace DB
         public int Count { get; set; }
         public double Price { get; set; }
 
+        //[ForeignKey("Type")]
         public virtual ComponentType CComponentType { get; set; }
     }
 
@@ -54,8 +55,9 @@ namespace DB
         public string Device { get; set; }
         public int Status { get; set; }
         public double? Price { get; set; }
-
+        //[ForeignKey("Client")]
         public virtual Client OClient { get; set; }
+        //[ForeignKey("ComponentOrders")]
         public virtual ICollection<ComponentOrder> ComponentOrders { get; set; }
     }
 
@@ -66,7 +68,10 @@ namespace DB
         public int OrderId { get; set; }
         public int ComponentId { get; set; }
         public int Count { get; set; }
+
+        //[ForeignKey("Order")]
         public virtual Order Order { get; set; }
+        //[ForeignKey("Component")]
         public virtual Component Component { get; set; }
     }
 

@@ -32,7 +32,6 @@ namespace ACREA
         public Components()
         {
             InitializeComponent();
-         //   SetColumnName();
             
         }
 
@@ -41,33 +40,24 @@ namespace ACREA
             this.Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
-            
-            //if (dataGridView1.SelectedRows.Count > 0)
-            //{
-            //    int selectedRowIndex = dataGridView1.SelectedRows[0].Index;
-            //    ComponentPart componentPart = new ComponentPart()
-            //    {
-            //        Name = dataGridView1.Rows[selectedRowIndex].Cells[0].Value.ToString(),
-            //        PType = DB.DataBase.GetPartType(dataGridView1.Rows[selectedRowIndex].Cells[1].Value.ToString()),
-            //        Quantity = int.Parse(dataGridView1.Rows[selectedRowIndex].Cells[2].Value.ToString()),
-            //        Price = double.Parse(dataGridView1.Rows[selectedRowIndex].Cells[3].Value.ToString())
-                   
-            //    };
-            //    Part part = new Part("Редактировать", componentPart);
-            //    part.ShowDialog();
-            //    dataGridView1.DataSource = DB.DataBase.GetDataTable(DB.SqlQueries.selectPart);
-
-            //}
-
-
-
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int selectedRowIndex = dataGridView1.SelectedRows[0].Index;
+                var name = dataGridView1.Rows[selectedRowIndex].Cells[0].Value.ToString();
+                var type = await Model.GetComponentTypeID(dataGridView1.Rows[selectedRowIndex].Cells[1].Value.ToString());
+                var count = int.Parse(dataGridView1.Rows[selectedRowIndex].Cells[2].Value.ToString());
+                var price = double.Parse(dataGridView1.Rows[selectedRowIndex].Cells[3].Value.ToString());
+                var componentForm = new ComponentForm("Редактировать", name, type, count, price);
+                componentForm.ShowDialog();
+                dataGridView1.DataSource = Model.GetComponentsToDataTable();
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            ComponentForm part = new ComponentForm("Добавить");
+            ComponentForm part = new ComponentForm("Добавить", null,null,null,null);
             part.ShowDialog();
             
         }
@@ -88,8 +78,8 @@ namespace ACREA
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //if (dataGridView1.SelectedRows.Count > 0)
-            //{
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
             //    int selectedRowIndex = dataGridView1.SelectedRows[0].Index;
             //    ComponentPart componentPart = new ComponentPart ()
             //    {
@@ -101,7 +91,7 @@ namespace ACREA
             //        DB.DataBase.DeletePart(componentPart.Name);
             //    }
             //    dataGridView1.DataSource = DB.DataBase.GetDataTable(DB.SqlQueries.selectPart);
-            //}
+            }
         }
     }
 }

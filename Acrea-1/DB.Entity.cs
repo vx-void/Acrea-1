@@ -1,15 +1,31 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using ACREA;
+using System.Security.Authentication;
 
 namespace DB
 {
     public class Client
     {
+        
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Phone { get; set; }
         public string Name { get; set; }
+
+        public Client(string name, string phone)
+        {
+            Id = Model.SetClientId();
+            Name = name;
+            Phone = phone;     
+        }
+        public Client(int id, string name, string phone)
+        {
+            Id = id;
+            Name = name;
+            Phone = phone;
+        }
     }
 
     public class ComponentType
@@ -43,16 +59,17 @@ namespace DB
     {
         public Order()
         {
-            ComponentOrders = new List<ComponentOrder>();
+
         }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public double DateStart { get; set; }
-        public double? DateDeadline { get; set; }
+        public DateTime DateStart { get; set; }
+        public DateTime DateDeadline { get; set; }
         public int Client { get; set; }
         public string Device { get; set; }
+        public string Defect { get; set; }
         public int Status { get; set; }
         public double? Price { get; set; }
         //[ForeignKey("Client")]

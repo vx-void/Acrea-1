@@ -45,7 +45,7 @@ namespace ACREA
                 case "Создать":
                     this.Name = nameTextBox.Text.ToString();
                     this.Phone = phoneTextBox.Text.ToString();
-                    var id = await Model.SetClientId();
+                    var id = Model.SetClientId();
                     await Model.InsertClient(id, Name, Phone);
                     break;
                 case "Редактировать":

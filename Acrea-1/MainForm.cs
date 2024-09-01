@@ -19,7 +19,7 @@ namespace ACREA
 
         private void Main_Load(object sender, EventArgs e)
         {
-           
+            dataGridView1.DataSource = Model.GetOrderDataTable();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -53,6 +53,33 @@ namespace ACREA
         {
             ClientFrom clientForm = new ClientFrom();
             clientForm.ShowDialog();
+        }
+
+        private void createOrderButton_Click(object sender, EventArgs e)
+        {
+            OrderForm orderForm = new OrderForm("Создать");
+            orderForm.ShowDialog();
+            dataGridView1.DataSource = Model.GetOrderDataTable();
+        }
+
+        private void editOrderButton_Click(object sender, EventArgs e)
+        {
+            int index = dataGridView1.SelectedRows[0].Index;
+
+            var order = new DB.Order()
+            {
+                Id = Convert.ToInt32(dataGridView1.Rows[index].Cells[0].Value),
+                Client = Model.GetClientIdByName(dataGridView1.Rows[index].Cells[1].Value.ToString()),         
+                Device = dataGridView1.Rows[index].Cells[2].Value.ToString(),
+                Defect = dataGridView1.Rows[index].Cells[3].Value.ToString(),
+                DateStart = DateTime.Parse(dataGridView1.Rows[index].Cells[4].Value.ToString()),
+                DateDeadline = DateTime.Parse(dataGridView1.Rows[index].Cells[5].Value.ToString()),
+                Status =  Model.GetStatusByName(dataGridView1.Rows[index].Cells[6].Value.ToString()),
+                Price = Convert.ToDouble(dataGridView1.Rows[index].Cells[7].Value.ToString())
+            };
+            OrderForm orderForm = new OrderForm("Редактировать", order);
+            orderForm.ShowDialog();
+            dataGridView1.DataSource = Model.GetOrderDataTable();
         }
     }
 }

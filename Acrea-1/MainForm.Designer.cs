@@ -28,223 +28,192 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deadline = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.izdelie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.neispravnost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Client = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.component = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.createOrderButton = new System.Windows.Forms.Button();
-            this.editOrderButton = new System.Windows.Forms.Button();
-            this.deleteOrderButton = new System.Windows.Forms.Button();
-            this.searchButton = new System.Windows.Forms.Button();
-            this.exitButton = new System.Windows.Forms.Button();
-            this.componentsButton = new System.Windows.Forms.Button();
-            this.componentTypeButton = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.clientButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.SuspendLayout();
+            dataGridView1 = new DataGridView();
+            createOrderButton = new Button();
+            editOrderButton = new Button();
+            deleteOrderButton = new Button();
+            searchButton = new Button();
+            exitButton = new Button();
+            componentsButton = new Button();
+            componentTypeButton = new Button();
+            groupBox1 = new GroupBox();
+            groupBox2 = new GroupBox();
+            groupBox3 = new GroupBox();
+            clientButton = new Button();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
+            SuspendLayout();
             // 
             // dataGridView1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Number,
-            this.Date,
-            this.deadline,
-            this.izdelie,
-            this.neispravnost,
-            this.Client,
-            this.component,
-            this.status});
-            this.dataGridView1.Location = new System.Drawing.Point(1, 133);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(844, 401);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // Number
-            // 
-            this.Number.HeaderText = "№";
-            this.Number.Name = "Number";
-            // 
-            // Date
-            // 
-            this.Date.HeaderText = "Дата";
-            this.Date.Name = "Date";
-            // 
-            // deadline
-            // 
-            this.deadline.HeaderText = "Крайний срок";
-            this.deadline.Name = "deadline";
-            // 
-            // izdelie
-            // 
-            this.izdelie.HeaderText = "Изделие";
-            this.izdelie.Name = "izdelie";
-            // 
-            // neispravnost
-            // 
-            this.neispravnost.HeaderText = "Неисправность";
-            this.neispravnost.Name = "neispravnost";
-            // 
-            // Client
-            // 
-            this.Client.HeaderText = "Заказчик";
-            this.Client.Name = "Client";
-            // 
-            // component
-            // 
-            this.component.HeaderText = "Заменяемые компоненты";
-            this.component.Name = "component";
-            // 
-            // status
-            // 
-            this.status.HeaderText = "Статус";
-            this.status.Name = "status";
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(1, 153);
+            dataGridView1.Margin = new Padding(4, 3, 4, 3);
+            dataGridView1.MultiSelect = false;
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new Size(985, 463);
+            dataGridView1.TabIndex = 0;
             // 
             // createOrderButton
             // 
-            this.createOrderButton.Location = new System.Drawing.Point(6, 21);
-            this.createOrderButton.Name = "createOrderButton";
-            this.createOrderButton.Size = new System.Drawing.Size(97, 21);
-            this.createOrderButton.TabIndex = 1;
-            this.createOrderButton.Text = "Создать";
-            this.createOrderButton.UseVisualStyleBackColor = true;
+            createOrderButton.Location = new Point(7, 24);
+            createOrderButton.Margin = new Padding(4, 3, 4, 3);
+            createOrderButton.Name = "createOrderButton";
+            createOrderButton.Size = new Size(113, 24);
+            createOrderButton.TabIndex = 1;
+            createOrderButton.Text = "Создать";
+            createOrderButton.UseVisualStyleBackColor = true;
+            createOrderButton.Click += createOrderButton_Click;
             // 
             // editOrderButton
             // 
-            this.editOrderButton.Location = new System.Drawing.Point(6, 51);
-            this.editOrderButton.Name = "editOrderButton";
-            this.editOrderButton.Size = new System.Drawing.Size(97, 21);
-            this.editOrderButton.TabIndex = 2;
-            this.editOrderButton.Text = "Редактировать";
-            this.editOrderButton.UseVisualStyleBackColor = true;
+            editOrderButton.Location = new Point(7, 59);
+            editOrderButton.Margin = new Padding(4, 3, 4, 3);
+            editOrderButton.Name = "editOrderButton";
+            editOrderButton.Size = new Size(113, 24);
+            editOrderButton.TabIndex = 2;
+            editOrderButton.Text = "Редактировать";
+            editOrderButton.UseVisualStyleBackColor = true;
+            editOrderButton.Click += editOrderButton_Click;
             // 
             // deleteOrderButton
             // 
-            this.deleteOrderButton.Location = new System.Drawing.Point(6, 78);
-            this.deleteOrderButton.Name = "deleteOrderButton";
-            this.deleteOrderButton.Size = new System.Drawing.Size(97, 24);
-            this.deleteOrderButton.TabIndex = 3;
-            this.deleteOrderButton.Text = "Удалить";
-            this.deleteOrderButton.UseVisualStyleBackColor = true;
+            deleteOrderButton.Location = new Point(7, 90);
+            deleteOrderButton.Margin = new Padding(4, 3, 4, 3);
+            deleteOrderButton.Name = "deleteOrderButton";
+            deleteOrderButton.Size = new Size(113, 28);
+            deleteOrderButton.TabIndex = 3;
+            deleteOrderButton.Text = "Удалить";
+            deleteOrderButton.UseVisualStyleBackColor = true;
             // 
             // searchButton
             // 
-            this.searchButton.Enabled = false;
-            this.searchButton.Location = new System.Drawing.Point(635, 12);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(97, 24);
-            this.searchButton.TabIndex = 4;
-            this.searchButton.Text = "Поиск";
-            this.searchButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-            this.searchButton.UseVisualStyleBackColor = true;
+            searchButton.Enabled = false;
+            searchButton.Location = new Point(860, 104);
+            searchButton.Margin = new Padding(4, 3, 4, 3);
+            searchButton.Name = "searchButton";
+            searchButton.Size = new Size(113, 28);
+            searchButton.TabIndex = 4;
+            searchButton.Text = "Поиск";
+            searchButton.TextImageRelation = TextImageRelation.TextAboveImage;
+            searchButton.UseVisualStyleBackColor = true;
             // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(769, 12);
-            this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(64, 24);
-            this.exitButton.TabIndex = 5;
-            this.exitButton.Text = "Выход";
-            this.exitButton.UseVisualStyleBackColor = true;
-            this.exitButton.Click += new System.EventHandler(this.button5_Click_1);
+            exitButton.Location = new Point(897, 14);
+            exitButton.Margin = new Padding(4, 3, 4, 3);
+            exitButton.Name = "exitButton";
+            exitButton.Size = new Size(75, 28);
+            exitButton.TabIndex = 5;
+            exitButton.Text = "Выход";
+            exitButton.UseVisualStyleBackColor = true;
+            exitButton.Click += button5_Click_1;
             // 
             // componentsButton
             // 
-            this.componentsButton.Location = new System.Drawing.Point(6, 51);
-            this.componentsButton.Name = "componentsButton";
-            this.componentsButton.Size = new System.Drawing.Size(117, 21);
-            this.componentsButton.TabIndex = 6;
-            this.componentsButton.Text = "Компоненты";
-            this.componentsButton.UseVisualStyleBackColor = true;
-            this.componentsButton.Click += new System.EventHandler(this.button6_Click_1);
+            componentsButton.Location = new Point(7, 59);
+            componentsButton.Margin = new Padding(4, 3, 4, 3);
+            componentsButton.Name = "componentsButton";
+            componentsButton.Size = new Size(136, 24);
+            componentsButton.TabIndex = 6;
+            componentsButton.Text = "Компоненты";
+            componentsButton.UseVisualStyleBackColor = true;
+            componentsButton.Click += button6_Click_1;
             // 
             // componentTypeButton
             // 
-            this.componentTypeButton.Enabled = false;
-            this.componentTypeButton.Location = new System.Drawing.Point(6, 78);
-            this.componentTypeButton.Name = "componentTypeButton";
-            this.componentTypeButton.Size = new System.Drawing.Size(117, 24);
-            this.componentTypeButton.TabIndex = 7;
-            this.componentTypeButton.Text = "Типы компонентов";
-            this.componentTypeButton.UseVisualStyleBackColor = true;
-            this.componentTypeButton.Click += new System.EventHandler(this.button7_Click);
+            componentTypeButton.Enabled = false;
+            componentTypeButton.Location = new Point(7, 90);
+            componentTypeButton.Margin = new Padding(4, 3, 4, 3);
+            componentTypeButton.Name = "componentTypeButton";
+            componentTypeButton.Size = new Size(136, 28);
+            componentTypeButton.TabIndex = 7;
+            componentTypeButton.Text = "Типы компонентов";
+            componentTypeButton.UseVisualStyleBackColor = true;
+            componentTypeButton.Click += button7_Click;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.editOrderButton);
-            this.groupBox1.Controls.Add(this.createOrderButton);
-            this.groupBox1.Controls.Add(this.deleteOrderButton);
-            this.groupBox1.Location = new System.Drawing.Point(3, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(132, 115);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Заказ";
+            groupBox1.Controls.Add(editOrderButton);
+            groupBox1.Controls.Add(createOrderButton);
+            groupBox1.Controls.Add(deleteOrderButton);
+            groupBox1.Location = new Point(4, 14);
+            groupBox1.Margin = new Padding(4, 3, 4, 3);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(4, 3, 4, 3);
+            groupBox1.Size = new Size(154, 133);
+            groupBox1.TabIndex = 9;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Заказ";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.componentsButton);
-            this.groupBox2.Controls.Add(this.componentTypeButton);
-            this.groupBox2.Location = new System.Drawing.Point(135, 12);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(132, 115);
-            this.groupBox2.TabIndex = 10;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Компоненты / Запчасти";
+            groupBox2.Controls.Add(componentsButton);
+            groupBox2.Controls.Add(componentTypeButton);
+            groupBox2.Location = new Point(158, 14);
+            groupBox2.Margin = new Padding(4, 3, 4, 3);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new Padding(4, 3, 4, 3);
+            groupBox2.Size = new Size(154, 133);
+            groupBox2.TabIndex = 10;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Компоненты / Запчасти";
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.clientButton);
-            this.groupBox3.Location = new System.Drawing.Point(273, 12);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(132, 115);
-            this.groupBox3.TabIndex = 11;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Заказчики";
+            groupBox3.Controls.Add(clientButton);
+            groupBox3.Location = new Point(318, 14);
+            groupBox3.Margin = new Padding(4, 3, 4, 3);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Padding = new Padding(4, 3, 4, 3);
+            groupBox3.Size = new Size(154, 133);
+            groupBox3.TabIndex = 11;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Заказчики";
             // 
             // clientButton
             // 
-            this.clientButton.Location = new System.Drawing.Point(6, 78);
-            this.clientButton.Name = "clientButton";
-            this.clientButton.Size = new System.Drawing.Size(117, 24);
-            this.clientButton.TabIndex = 7;
-            this.clientButton.Text = "список заказчиков";
-            this.clientButton.UseVisualStyleBackColor = true;
-            this.clientButton.Click += new System.EventHandler(this.clientButton_Click);
+            clientButton.Location = new Point(7, 90);
+            clientButton.Margin = new Padding(4, 3, 4, 3);
+            clientButton.Name = "clientButton";
+            clientButton.Size = new Size(136, 28);
+            clientButton.TabIndex = 7;
+            clientButton.Text = "список заказчиков";
+            clientButton.UseVisualStyleBackColor = true;
+            clientButton.Click += clientButton_Click;
             // 
-            // Main
+            // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(845, 532);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.exitButton);
-            this.Controls.Add(this.searchButton);
-            this.Controls.Add(this.dataGridView1);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "Main";
-            this.Text = "ACREA";
-            this.Load += new System.EventHandler(this.Main_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(986, 614);
+            Controls.Add(groupBox3);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
+            Controls.Add(exitButton);
+            Controls.Add(searchButton);
+            Controls.Add(dataGridView1);
+            Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "MainForm";
+            Text = "ACREA";
+            Load += Main_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
@@ -256,14 +225,6 @@
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Button componentsButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn deadline;
-        private System.Windows.Forms.DataGridViewTextBoxColumn izdelie;
-        private System.Windows.Forms.DataGridViewTextBoxColumn neispravnost;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Client;
-        private System.Windows.Forms.DataGridViewTextBoxColumn component;
-        private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.Button componentTypeButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;

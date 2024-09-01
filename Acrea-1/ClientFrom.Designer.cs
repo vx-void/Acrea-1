@@ -38,11 +38,13 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(-1, 47);
             dataGridView1.Margin = new Padding(4, 3, 4, 3);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(442, 407);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellClick += dataGridView1_CellClick;
@@ -104,7 +106,7 @@
             Controls.Add(dataGridView1);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Margin = new Padding(4, 3, 4, 3);
-            base.Name = "ClientFrom";
+            Name = "ClientFrom";
             Text = "Клиенты";
             Load += ClientFrom_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

@@ -52,12 +52,13 @@
             label6 = new Label();
             label10 = new Label();
             priceTextBox = new TextBox();
+            clientButton = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // actionButton
             // 
-            actionButton.Location = new Point(19, 486);
+            actionButton.Location = new Point(42, 482);
             actionButton.Margin = new Padding(4, 3, 4, 3);
             actionButton.Name = "actionButton";
             actionButton.Size = new Size(118, 26);
@@ -68,7 +69,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(406, 486);
+            button2.Location = new Point(263, 482);
             button2.Margin = new Padding(4, 3, 4, 3);
             button2.Name = "button2";
             button2.Size = new Size(118, 26);
@@ -79,10 +80,10 @@
             // 
             // deviceTextBox
             // 
-            deviceTextBox.Location = new Point(19, 123);
+            deviceTextBox.Location = new Point(27, 205);
             deviceTextBox.Margin = new Padding(4, 3, 4, 3);
             deviceTextBox.Name = "deviceTextBox";
-            deviceTextBox.Size = new Size(511, 23);
+            deviceTextBox.Size = new Size(307, 23);
             deviceTextBox.TabIndex = 19;
             // 
             // label2
@@ -98,7 +99,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(15, 105);
+            label3.Location = new Point(24, 187);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(70, 15);
@@ -108,7 +109,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(280, 44);
+            label8.Location = new Point(230, 44);
             label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
             label8.Size = new Size(84, 15);
@@ -117,7 +118,7 @@
             // 
             // dateTimeStart
             // 
-            dateTimeStart.Location = new Point(19, 62);
+            dateTimeStart.Location = new Point(24, 62);
             dateTimeStart.Margin = new Padding(4, 3, 4, 3);
             dateTimeStart.Name = "dateTimeStart";
             dateTimeStart.Size = new Size(166, 23);
@@ -125,7 +126,7 @@
             // 
             // dateTimeEnd
             // 
-            dateTimeEnd.Location = new Point(284, 62);
+            dateTimeEnd.Location = new Point(234, 62);
             dateTimeEnd.Margin = new Padding(4, 3, 4, 3);
             dateTimeEnd.Name = "dateTimeEnd";
             dateTimeEnd.Size = new Size(166, 23);
@@ -153,7 +154,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(280, 10);
+            label7.Location = new Point(247, 7);
             label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
             label7.Size = new Size(43, 15);
@@ -163,25 +164,25 @@
             // statusComboBox
             // 
             statusComboBox.FormattingEnabled = true;
-            statusComboBox.Location = new Point(348, 7);
+            statusComboBox.Location = new Point(299, 7);
             statusComboBox.Margin = new Padding(4, 3, 4, 3);
             statusComboBox.Name = "statusComboBox";
-            statusComboBox.Size = new Size(176, 23);
+            statusComboBox.Size = new Size(115, 23);
             statusComboBox.TabIndex = 40;
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(318, 183);
+            dataGridView1.Location = new Point(263, 273);
             dataGridView1.Margin = new Padding(4, 3, 4, 3);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(206, 229);
+            dataGridView1.Size = new Size(151, 151);
             dataGridView1.TabIndex = 41;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(315, 162);
+            label4.Location = new Point(263, 252);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(151, 15);
@@ -191,7 +192,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(14, 162);
+            label5.Location = new Point(19, 98);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new Size(82, 15);
@@ -200,28 +201,28 @@
             // 
             // clientNameTextBox
             // 
-            clientNameTextBox.Location = new Point(18, 180);
+            clientNameTextBox.Location = new Point(24, 116);
             clientNameTextBox.Margin = new Padding(4, 3, 4, 3);
             clientNameTextBox.Name = "clientNameTextBox";
-            clientNameTextBox.Size = new Size(259, 23);
+            clientNameTextBox.Size = new Size(219, 23);
             clientNameTextBox.TabIndex = 43;
             // 
             // button3
             // 
-            button3.Location = new Point(318, 418);
+            button3.Location = new Point(263, 435);
             button3.Margin = new Padding(4, 3, 4, 3);
             button3.Name = "button3";
-            button3.Size = new Size(85, 33);
+            button3.Size = new Size(71, 23);
             button3.TabIndex = 47;
             button3.Text = "Добавить";
             button3.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            button4.Location = new Point(439, 418);
+            button4.Location = new Point(348, 436);
             button4.Margin = new Padding(4, 3, 4, 3);
             button4.Name = "button4";
-            button4.Size = new Size(85, 33);
+            button4.Size = new Size(66, 23);
             button4.TabIndex = 48;
             button4.Text = "Удалить";
             button4.UseVisualStyleBackColor = true;
@@ -229,7 +230,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(15, 285);
+            label9.Location = new Point(20, 240);
             label9.Margin = new Padding(4, 0, 4, 0);
             label9.Name = "label9";
             label9.Size = new Size(149, 15);
@@ -238,25 +239,25 @@
             // 
             // defectTextBox
             // 
-            defectTextBox.Location = new Point(19, 303);
+            defectTextBox.Location = new Point(24, 261);
             defectTextBox.Margin = new Padding(4, 3, 4, 3);
             defectTextBox.Multiline = true;
             defectTextBox.Name = "defectTextBox";
-            defectTextBox.Size = new Size(258, 109);
+            defectTextBox.Size = new Size(219, 151);
             defectTextBox.TabIndex = 49;
             // 
             // clientPhoneTextBox
             // 
-            clientPhoneTextBox.Location = new Point(18, 240);
+            clientPhoneTextBox.Location = new Point(24, 161);
             clientPhoneTextBox.Margin = new Padding(4, 3, 4, 3);
             clientPhoneTextBox.Name = "clientPhoneTextBox";
-            clientPhoneTextBox.Size = new Size(259, 23);
+            clientPhoneTextBox.Size = new Size(219, 23);
             clientPhoneTextBox.TabIndex = 45;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(14, 222);
+            label6.Location = new Point(24, 142);
             label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
             label6.Size = new Size(76, 15);
@@ -278,14 +279,26 @@
             priceTextBox.Location = new Point(24, 436);
             priceTextBox.Margin = new Padding(4, 3, 4, 3);
             priceTextBox.Name = "priceTextBox";
-            priceTextBox.Size = new Size(253, 23);
+            priceTextBox.Size = new Size(219, 23);
             priceTextBox.TabIndex = 51;
+            // 
+            // clientButton
+            // 
+            clientButton.Location = new Point(263, 136);
+            clientButton.Margin = new Padding(4, 3, 4, 3);
+            clientButton.Name = "clientButton";
+            clientButton.Size = new Size(137, 27);
+            clientButton.TabIndex = 53;
+            clientButton.Text = "Выбор клиента";
+            clientButton.UseVisualStyleBackColor = true;
+            clientButton.Click += clientButton_Click;
             // 
             // OrderForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(545, 536);
+            ClientSize = new Size(429, 520);
+            Controls.Add(clientButton);
             Controls.Add(label10);
             Controls.Add(priceTextBox);
             Controls.Add(label9);
@@ -345,5 +358,6 @@
         private Label label6;
         private Label label10;
         private TextBox priceTextBox;
+        private Button clientButton;
     }
 }

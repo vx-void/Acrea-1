@@ -79,7 +79,7 @@ namespace ACREA
 
         private async void SetComponentOrder(Order? order)
         {
-            
+
             if (actionButton.Text == "Создать")
             {
 
@@ -103,16 +103,27 @@ namespace ACREA
                 order.OClient = new DB.Client(clientNameTextBox.Text, clientPhoneTextBox.Text);
                 order.Status = statusComboBox.SelectedIndex + 1;
                 order.Price = double.Parse(priceTextBox.Text);
-             
+
                 Model.UpdateOrder(order);
             }
-                
+
             this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void clientButton_Click(object sender, EventArgs e)
+        {
+            ChangeClientForm change = new ChangeClientForm();
+            //change.ShowDialog();
+            if(change.ShowDialog() == DialogResult.OK)
+            {
+                clientNameTextBox.Text = change.ClientName;
+                clientPhoneTextBox.Text = change.ClientPhone;
+            }
         }
     }
 }

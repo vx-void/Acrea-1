@@ -74,16 +74,15 @@ namespace ACREA
                      .FirstOrDefaultAsync();
             }
         }
-        public static async Task<string> GetClientNameById(int id)
+        public static string GetClientNameById(int id)
         {
-            string name = "";
             using (var context = new AcreaContext(DbConst.context))
             {
-                name = await context.Clients.Where(c => c.Id == id)
+                return context.Clients.Where(c => c.Id == id)
                      .Select(c => c.Name)
-                     .FirstOrDefaultAsync();
+                     .FirstOrDefault();
             }
-            return name;
+
         }
         public static int GetClientIdByName(string name)
         {
@@ -112,5 +111,16 @@ namespace ACREA
             }
             return dataTable;
         }
+        public static string GetClientPhoneById(int id)
+        {   
+            using (var context = new AcreaContext(DbConst.context))
+            {
+                return context.Clients.Where(c => c.Id == id)
+                     .Select(c => c.Phone)
+                     .FirstOrDefault();
+            }
+             
+        }
+
     }
 }

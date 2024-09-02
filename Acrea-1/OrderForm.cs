@@ -30,8 +30,8 @@ namespace ACREA
                 dateTimeStart.Value = _order.DateStart;
                 dateTimeEnd.Value = _order.DateDeadline;
                 deviceTextBox.Text = _order.Device;
-                clientNameTextBox.Text = _order.OClient.Name;
-                clientPhoneTextBox.Text = _order.OClient.Phone;
+                clientNameTextBox.Text = Model.GetClientNameById(_order.Client);    ////----------------------------------------------------<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                clientPhoneTextBox.Text = Model.GetClientPhoneById(_order.Client);
                 defectTextBox.Text = _order.Defect;
                 priceTextBox.Text = _order.Price.ToString();
             }
@@ -79,9 +79,11 @@ namespace ACREA
 
         private async void SetComponentOrder(Order? order)
         {
+            
             if (actionButton.Text == "Создать")
             {
-                order.Id = await Model.GetNextOrderId();
+
+                order.Id = await Model.GetNextOrderId(); //<<----------------------------------------------------------------------
                 order.DateStart = dateTimeStart.Value;
                 order.DateDeadline = dateTimeEnd.Value;
                 order.Device = deviceTextBox.Text;
@@ -89,12 +91,22 @@ namespace ACREA
                 order.OClient = new DB.Client(clientNameTextBox.Text, clientPhoneTextBox.Text);
                 order.Status = statusComboBox.SelectedIndex + 1;
                 order.Price = double.Parse(priceTextBox.Text);
+                Model.CreateOrder(order);
             }
             else if (actionButton.Text == "Редактировать")
             {
-
+                order.Id = int.Parse(idTextBox.Text); //<<----------------------------------------------------------------------
+                order.DateStart = dateTimeStart.Value;
+                order.DateDeadline = dateTimeEnd.Value;
+                order.Device = deviceTextBox.Text;
+                order.Defect = defectTextBox.Text;
+                order.OClient = new DB.Client(clientNameTextBox.Text, clientPhoneTextBox.Text);
+                order.Status = statusComboBox.SelectedIndex + 1;
+                order.Price = double.Parse(priceTextBox.Text);
+             
+                Model.UpdateOrder(order);
             }
-                Model.CreateOrder(order);
+                
             this.Close();
         }
 

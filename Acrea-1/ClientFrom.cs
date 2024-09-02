@@ -73,9 +73,16 @@ namespace ACREA
 
         private void SetClientNameAndPhone()
         {
-            int selectedRowIndex = dataGridView1.SelectedRows[0].Index;
-            this.Name = dataGridView1.Rows[selectedRowIndex].Cells[0].Value.ToString();
-            this.Phone = dataGridView1.Rows[selectedRowIndex].Cells[1].Value.ToString();
+            try
+            {
+                int selectedRowIndex = dataGridView1.SelectedRows[0].Index;
+                this.Name = dataGridView1.Rows[selectedRowIndex].Cells[0].Value.ToString();
+                this.Phone = dataGridView1.Rows[selectedRowIndex].Cells[1].Value.ToString();
+            }
+            catch(System.NullReferenceException)
+            {
+                MessageBox.Show("Клиент не выбран или таблица пустая.");
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

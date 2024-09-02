@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -64,22 +65,29 @@ namespace ACREA
 
         private void editOrderButton_Click(object sender, EventArgs e)
         {
-            int index = dataGridView1.SelectedRows[0].Index;
-
-            var order = new DB.Order()
+            try
             {
-                Id = Convert.ToInt32(dataGridView1.Rows[index].Cells[0].Value),
-                Client = Model.GetClientIdByName(dataGridView1.Rows[index].Cells[1].Value.ToString()),         
-                Device = dataGridView1.Rows[index].Cells[2].Value.ToString(),
-                Defect = dataGridView1.Rows[index].Cells[3].Value.ToString(),
-                DateStart = DateTime.Parse(dataGridView1.Rows[index].Cells[4].Value.ToString()),
-                DateDeadline = DateTime.Parse(dataGridView1.Rows[index].Cells[5].Value.ToString()),
-                Status =  Model.GetStatusByName(dataGridView1.Rows[index].Cells[6].Value.ToString()),
-                Price = Convert.ToDouble(dataGridView1.Rows[index].Cells[7].Value.ToString())
-            };
-            OrderForm orderForm = new OrderForm("Редактировать", order);
-            orderForm.ShowDialog();
-            dataGridView1.DataSource = Model.GetOrderDataTable();
+                int index = dataGridView1.SelectedRows[0].Index;
+
+                var order = new DB.Order()
+                {
+                    Id = Convert.ToInt32(dataGridView1.Rows[index].Cells[0].Value),
+                    Client = Model.GetClientIdByName(dataGridView1.Rows[index].Cells[1].Value.ToString()),
+                    Device = dataGridView1.Rows[index].Cells[2].Value.ToString(),
+                    Defect = dataGridView1.Rows[index].Cells[3].Value.ToString(),
+                    DateStart = DateTime.Parse(dataGridView1.Rows[index].Cells[4].Value.ToString()),
+                    DateDeadline = DateTime.Parse(dataGridView1.Rows[index].Cells[5].Value.ToString()),
+                    Status = Model.GetStatusByName(dataGridView1.Rows[index].Cells[6].Value.ToString()),
+                    Price = Convert.ToDouble(dataGridView1.Rows[index].Cells[7].Value.ToString())
+                };
+                OrderForm orderForm = new OrderForm("Редактировать", order);
+                orderForm.ShowDialog();
+                dataGridView1.DataSource = Model.GetOrderDataTable();
+            }
+            catch (System.ArgumentOutOfRangeException ex)
+            {
+                MessageBox.Show("Строка заказа не выбрана или отсутсвует");
+            }
         }
     }
 }

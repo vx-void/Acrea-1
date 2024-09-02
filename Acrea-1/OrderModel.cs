@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Mime;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -62,6 +63,27 @@ namespace ACREA
                 currentOrderCount++;
             }
             return currentOrderCount;
+        }
+
+        public static void UpdateOrder(Order order)
+        {
+            using (var context = new AcreaContext(DbConst.context))
+            {
+                var existOrder = context.Orders.Find(order.Id);
+                if(existOrder != null)
+                {
+                    existOrder.Status = order.Status;
+                    existOrder.Client = order.Client;
+                    existOrder.DateStart = order.DateStart;
+                    existOrder.DateDeadline = order.DateDeadline;
+                    existOrder.Device = order.Device;
+                    existOrder.Defect = order.Defect;
+                    existOrder.Price = order.Price;
+             //       context.Entry(existOrder).CurrentValues.SetValues(order);
+                    context.SaveChanges();
+                }
+
+            }
         }
 
     }

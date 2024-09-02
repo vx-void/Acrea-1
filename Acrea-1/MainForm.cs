@@ -46,7 +46,7 @@ namespace ACREA
 
         private void button6_Click_1(object sender, EventArgs e)
         {
-            Components components = new Components();
+            ComponentsListForm components = new ComponentsListForm();
             components.ShowDialog();
         }
 

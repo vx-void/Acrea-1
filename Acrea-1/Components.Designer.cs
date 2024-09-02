@@ -1,6 +1,6 @@
 ﻿namespace ACREA
 {
-    partial class Components
+    partial class ComponentsListForm
     {
         /// <summary>
         /// Required designer variable.

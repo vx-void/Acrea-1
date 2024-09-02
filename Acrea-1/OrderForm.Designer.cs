@@ -44,8 +44,8 @@
             label4 = new Label();
             label5 = new Label();
             clientNameTextBox = new TextBox();
-            button3 = new Button();
-            button4 = new Button();
+            addComponentButton = new Button();
+            deleteComponentButton = new Button();
             label9 = new Label();
             defectTextBox = new TextBox();
             clientPhoneTextBox = new TextBox();
@@ -207,25 +207,26 @@
             clientNameTextBox.Size = new Size(219, 23);
             clientNameTextBox.TabIndex = 43;
             // 
-            // button3
+            // addComponentButton
             // 
-            button3.Location = new Point(263, 435);
-            button3.Margin = new Padding(4, 3, 4, 3);
-            button3.Name = "button3";
-            button3.Size = new Size(71, 23);
-            button3.TabIndex = 47;
-            button3.Text = "Добавить";
-            button3.UseVisualStyleBackColor = true;
+            addComponentButton.Location = new Point(263, 435);
+            addComponentButton.Margin = new Padding(4, 3, 4, 3);
+            addComponentButton.Name = "addComponentButton";
+            addComponentButton.Size = new Size(71, 23);
+            addComponentButton.TabIndex = 47;
+            addComponentButton.Text = "Добавить";
+            addComponentButton.UseVisualStyleBackColor = true;
+            addComponentButton.Click += addComponentButton_Click;
             // 
-            // button4
+            // deleteComponentButton
             // 
-            button4.Location = new Point(348, 436);
-            button4.Margin = new Padding(4, 3, 4, 3);
-            button4.Name = "button4";
-            button4.Size = new Size(66, 23);
-            button4.TabIndex = 48;
-            button4.Text = "Удалить";
-            button4.UseVisualStyleBackColor = true;
+            deleteComponentButton.Location = new Point(348, 436);
+            deleteComponentButton.Margin = new Padding(4, 3, 4, 3);
+            deleteComponentButton.Name = "deleteComponentButton";
+            deleteComponentButton.Size = new Size(66, 23);
+            deleteComponentButton.TabIndex = 48;
+            deleteComponentButton.Text = "Удалить";
+            deleteComponentButton.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
@@ -303,8 +304,8 @@
             Controls.Add(priceTextBox);
             Controls.Add(label9);
             Controls.Add(defectTextBox);
-            Controls.Add(button4);
-            Controls.Add(button3);
+            Controls.Add(deleteComponentButton);
+            Controls.Add(addComponentButton);
             Controls.Add(label6);
             Controls.Add(clientPhoneTextBox);
             Controls.Add(label5);
@@ -350,8 +351,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox clientNameTextBox;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button addComponentButton;
+        private System.Windows.Forms.Button deleteComponentButton;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox defectTextBox;
         private TextBox clientPhoneTextBox;

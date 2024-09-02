@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -96,7 +98,62 @@ namespace ACREA
                 }
             }
         }
+        public static async Task UpdateComponentCount(int componentId, int amount, bool isIncrement)
+        {
+            using (var context = new AcreaContext(DbConst.context))
+            {
+                var component = await context.Components.FindAsync(componentId);
+                if (component != null)
+                {
+                    if (isIncrement)
+                    {
+                        component.Count += amount;
+                    }
+                    else
+                    {
+                        if (component.Count >= amount)
+                        {
+                            component.Count -= amount;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Количество после удаления станет отрицательным");
+                            return;
+                        }
+                    }
 
+                    context.Components.Update(component);
+                    await context.SaveChangesAsync();
+                }
+            }
+        }
+        public static async Task<DB.Component?> GetComponentByName(string name)
+        {
+            using(var context = new AcreaContext(DbConst.context))
+            {
+                int id = await GetComponentIdByName(name);
+                return await context.Components.FindAsync(id);
+            }
+        }
+
+        public static DataTable GetComponentsDataTable(List<DB.Component> components)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("Название", typeof(string));
+            dataTable.Columns.Add("Количество", typeof(int));
+      //      dataTable.Columns.Add("Цена", typeof(double));
+
+            foreach (var component in components)
+            {
+                DataRow row = dataTable.NewRow();
+                row["Название"] = component.Name;
+                row["Количество"] = component.Count;
+               // row["Цена"] = component.Price;
+                dataTable.Rows.Add(row);
+            }
+
+            return dataTable;
+        }
 
         //Entity: ComponentType
         public static async Task<int> GetComponentTypeID(string name)
@@ -123,5 +180,31 @@ namespace ACREA
                 return componentType?.Name ?? string.Empty;
             }
         }
+
+        //Entity: ComponentOrder
+        public static async Task AddComponentToOrder(int orderId, int componentId, int count)
+        {
+            using (var context = new AcreaContext(DbConst.context))
+            {
+                var existingComponentOrder = await context.ComponentOrders.FirstOrDefaultAsync(co => co.OrderId == orderId && co.ComponentId == componentId);
+                if (existingComponentOrder != null)
+                {
+                    existingComponentOrder.Count += count;
+                    context.ComponentOrders.Update(existingComponentOrder);
+                }
+                else
+                {
+                    var componentOrder = new DB.ComponentOrder
+                    {
+                        OrderId = orderId,
+                        ComponentId = componentId,
+                        Count = count
+                    };
+                    context.ComponentOrders.Add(componentOrder);
+                }
+                await context.SaveChangesAsync();
+            }
+        }
     }
+    
 }

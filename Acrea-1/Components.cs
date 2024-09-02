@@ -11,7 +11,7 @@ using System.Xml.Linq;
 
 namespace ACREA
 {
-    public partial class Components : Form
+    public partial class ComponentsListForm : Form
     {
         private Dictionary<string, string> columnDict = new Dictionary<string, string>()
         {
@@ -29,7 +29,7 @@ namespace ACREA
             foreach (var item in columnDict)
                 dataGridView1.Columns.Add(item.Key, item.Value);
         }
-        public Components()
+        public ComponentsListForm()
         {
             InitializeComponent();
             

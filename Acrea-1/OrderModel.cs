@@ -1,4 +1,5 @@
 ﻿using DB;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,6 +13,7 @@ namespace ACREA
 {
     public static partial class Model
     {
+        //Entity: Order
         public static DataTable GetOrderDataTable()
         {
             DataTable dataTable = new DataTable();
@@ -54,7 +56,7 @@ namespace ACREA
             }
         }
 
-        public static async Task<int> GetNextOrderId()
+        public static int GetNextOrderId()
         {
             int currentOrderCount = 0;
             using (var context = new AcreaContext(DbConst.context))
@@ -85,6 +87,8 @@ namespace ACREA
 
             }
         }
+
+       
 
     }
 }

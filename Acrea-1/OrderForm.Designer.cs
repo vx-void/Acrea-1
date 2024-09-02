@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridView dataGridView1;
             actionButton = new Button();
             button2 = new Button();
             deviceTextBox = new TextBox();
@@ -40,7 +41,6 @@
             idTextBox = new TextBox();
             label7 = new Label();
             statusComboBox = new ComboBox();
-            dataGridView1 = new DataGridView();
             label4 = new Label();
             label5 = new Label();
             clientNameTextBox = new TextBox();
@@ -53,6 +53,7 @@
             label10 = new Label();
             priceTextBox = new TextBox();
             clientButton = new Button();
+            dataGridView1 = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -83,7 +84,7 @@
             deviceTextBox.Location = new Point(27, 205);
             deviceTextBox.Margin = new Padding(4, 3, 4, 3);
             deviceTextBox.Name = "deviceTextBox";
-            deviceTextBox.Size = new Size(307, 23);
+            deviceTextBox.Size = new Size(389, 23);
             deviceTextBox.TabIndex = 19;
             // 
             // label2
@@ -172,17 +173,22 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllHeaders;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(263, 273);
+            dataGridView1.Location = new Point(24, 333);
             dataGridView1.Margin = new Padding(4, 3, 4, 3);
+            dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(151, 151);
+            dataGridView1.ReadOnly = true;
+            dataGridView1.ShowEditingIcon = false;
+            dataGridView1.Size = new Size(392, 82);
             dataGridView1.TabIndex = 41;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(263, 252);
+            label4.Location = new Point(24, 315);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(151, 15);
@@ -209,7 +215,7 @@
             // 
             // addComponentButton
             // 
-            addComponentButton.Location = new Point(263, 435);
+            addComponentButton.Location = new Point(263, 421);
             addComponentButton.Margin = new Padding(4, 3, 4, 3);
             addComponentButton.Name = "addComponentButton";
             addComponentButton.Size = new Size(71, 23);
@@ -220,13 +226,14 @@
             // 
             // deleteComponentButton
             // 
-            deleteComponentButton.Location = new Point(348, 436);
+            deleteComponentButton.Location = new Point(350, 421);
             deleteComponentButton.Margin = new Padding(4, 3, 4, 3);
             deleteComponentButton.Name = "deleteComponentButton";
             deleteComponentButton.Size = new Size(66, 23);
             deleteComponentButton.TabIndex = 48;
             deleteComponentButton.Text = "Удалить";
             deleteComponentButton.UseVisualStyleBackColor = true;
+            deleteComponentButton.Click += deleteComponentButton_Click;
             // 
             // label9
             // 
@@ -244,7 +251,7 @@
             defectTextBox.Margin = new Padding(4, 3, 4, 3);
             defectTextBox.Multiline = true;
             defectTextBox.Name = "defectTextBox";
-            defectTextBox.Size = new Size(219, 151);
+            defectTextBox.Size = new Size(390, 39);
             defectTextBox.TabIndex = 49;
             // 
             // clientPhoneTextBox

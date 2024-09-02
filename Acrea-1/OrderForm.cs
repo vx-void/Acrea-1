@@ -1,4 +1,5 @@
 ﻿using DB;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace ACREA
     public partial class OrderForm : Form
     {
         private Order? _order { get; set; }
-        
+
         private List<DB.Component> selectedComponents = new List<DB.Component>();
         private double componentsPrice = 0;
 
@@ -44,8 +45,8 @@ namespace ACREA
             }
         }
 
-     
-        
+
+
 
 
         private void textBox4_TextChanged(object sender, EventArgs e)
@@ -53,24 +54,24 @@ namespace ACREA
 
         }
 
-
         private void Order_Load(object sender, EventArgs e)
         {
-
-
             statusComboBox.DataSource = new BindingSource(DbConst.statusDict, null);
             statusComboBox.DisplayMember = "Value";
             statusComboBox.ValueMember = "Key";
             statusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            
-
+            try
+            {
+                dataGridView1.DataSource = Model.GetComponentOrderDataTable(Convert.ToInt32(idTextBox.Text));
+            }
+            catch(NullReferenceException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
-
-
         private async void button1_Click(object sender, EventArgs e)
         {
             var order = new DB.Order();
-
             switch (actionButton.Text)
             {
                 case "Создать":
@@ -84,16 +85,18 @@ namespace ACREA
             {
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    int componentId = (int)row.Cells["ComponentId"].Value;
-                    int count = (int)row.Cells["Count"].Value;
-                    await Model.AddComponentToOrder(Convert.ToInt32(idTextBox.Text), componentId, count);
+                    if (row != null)
+                    {
+                        int componentId = await Model.GetComponentIdByName(row.Cells["Наименование"].Value.ToString());
+                        Model.AddComponentToOrder(Convert.ToInt32(idTextBox.Text), Convert.ToInt32(componentId));
+                    }
                 }
             }
         }
 
         private void SetParameters(Order? order)
         {
-            order.Id = int.Parse(idTextBox.Text); 
+            order.Id = int.Parse(idTextBox.Text);
             order.DateStart = dateTimeStart.Value;
             order.DateDeadline = dateTimeEnd.Value;
             order.Device = deviceTextBox.Text;
@@ -101,7 +104,7 @@ namespace ACREA
             order.OClient = new DB.Client(clientNameTextBox.Text, clientPhoneTextBox.Text);
             order.Status = statusComboBox.SelectedIndex + 1;
             priceTextBox.Text = (Convert.ToDouble(_order.Price) + componentsPrice).ToString();
-            Model.CreateOrder(order);
+
         }
 
         private async void SetComponentOrder(Order? order)
@@ -148,23 +151,40 @@ namespace ACREA
                 componentsPrice += form.SelectedComponent.Price;
                 priceTextBox.Text = (Convert.ToDouble(_order.Price) + componentsPrice).ToString();
                 await Model.UpdateComponentCount(form.SelectedComponent.Id, 1, false);
-                dataGridView1.DataSource = Model.GetComponentsDataTable(selectedComponents);
+                //-------------------------V----------------------------------------------
+                DataTable dataTable = new DataTable();
+
+                dataTable.Columns.Add("Наименование", typeof(string));
+
+                foreach (var component in selectedComponents)
+                {
+                    dataTable.Rows.Add(component.Name);
+                }
+                dataGridView1.DataSource = dataTable;
             }
         }
 
-        private async void deleteComponentButton_Click(object sender, EventArgs e)
+        private void deleteComponentButton_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count == 0 || dataGridView1.SelectedRows.ToString() == null)
             {
-                int selectedRowIndex = dataGridView1.SelectedRows[0].Index;
-                var selectedComponent = selectedComponents[selectedRowIndex];
-
-                selectedComponents.Remove(selectedComponent);
-                componentsPrice -= selectedComponent.Price;
-                priceTextBox.Text = (Convert.ToDouble(_order.Price) + componentsPrice).ToString();
-                await Model.UpdateComponentCount(selectedComponent.Id, 1, true);
-                dataGridView1.DataSource = Model.GetComponentsDataTable(selectedComponents);
+                MessageBox.Show("Select a component to remove");
+                return;
             }
+
+            int selectedIndex = dataGridView1.SelectedRows[0].Index;
+
+            DataTable dataTable = (DataTable)dataGridView1.DataSource;
+            DB.Component selectedComponent = selectedComponents[selectedIndex];
+
+            dataTable.Rows.RemoveAt(selectedIndex);
+            dataGridView1.DataSource = dataTable;
+
+            selectedComponents.RemoveAt(selectedIndex);
+            componentsPrice -= selectedComponent.Price;
+            priceTextBox.Text = (Convert.ToDouble(_order.Price) + componentsPrice).ToString();
+
+            Model.UpdateComponentCount(selectedComponent.Id, -1, false);
         }
     }
 }

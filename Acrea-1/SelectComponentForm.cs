@@ -31,7 +31,7 @@ namespace ACREA
 
         private async void componentActionButton_Click(object sender, EventArgs e)
         {
-            
+
             int selectedRowIndex = dataGridView1.SelectedRows[0].Index;
             SelectedComponent = await Model.GetComponentByName(dataGridView1.Rows[selectedRowIndex].Cells[0].Value.ToString());
             DialogResult = DialogResult.OK;

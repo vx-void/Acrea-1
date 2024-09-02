@@ -182,29 +182,29 @@ namespace ACREA
         }
 
         //Entity: ComponentOrder
-        public static async Task AddComponentToOrder(int orderId, int componentId, int count)
-        {
-            using (var context = new AcreaContext(DbConst.context))
-            {
-                var existingComponentOrder = await context.ComponentOrders.FirstOrDefaultAsync(co => co.OrderId == orderId && co.ComponentId == componentId);
-                if (existingComponentOrder != null)
-                {
-                    existingComponentOrder.Count += count;
-                    context.ComponentOrders.Update(existingComponentOrder);
-                }
-                else
-                {
-                    var componentOrder = new DB.ComponentOrder
-                    {
-                        OrderId = orderId,
-                        ComponentId = componentId,
-                        Count = count
-                    };
-                    context.ComponentOrders.Add(componentOrder);
-                }
-                await context.SaveChangesAsync();
-            }
-        }
+        //public static async Task AddComponentToOrder(int orderId, int componentId, int count)
+        //{
+        //    using (var context = new AcreaContext(DbConst.context))
+        //    {
+        //        var existingComponentOrder = await context.ComponentOrders.FirstOrDefaultAsync(co => co.OrderId == orderId && co.ComponentId == componentId);
+        //        if (existingComponentOrder != null)
+        //        {
+        //            existingComponentOrder.Count += count;
+        //            context.ComponentOrders.Update(existingComponentOrder);
+        //        }
+        //        else
+        //        {
+        //            var componentOrder = new DB.ComponentOrder
+        //            {
+        //                OrderId = orderId,
+        //                ComponentId = componentId,
+        //                Count = count
+        //            };
+        //            context.ComponentOrders.Add(componentOrder);
+        //        }
+        //        await context.SaveChangesAsync();
+        //    }
+        //}
     }
     
 }

@@ -88,7 +88,102 @@ namespace ACREA
             }
         }
 
-       
+        public static void AddComponentToOrder(int orderId, int componentId)
+        {
+            using (var context = new AcreaContext(DbConst.context))
+            {
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var order = context.Set<Order>().Find(orderId);
+                        var component = context.Set<Component>().Find(componentId);
 
+                        if (order == null || component == null)
+                        {
+                            //throw new InvalidOperationException("Order or component not found");
+                            MessageBox.Show("Заказ или компонент не найдены!");
+                        }
+
+                        var componentOrder = new ComponentOrder
+                        {
+                            OrderId = orderId,
+                            ComponentId = componentId,
+                            Count = 1
+                        };
+
+                        context.Set<ComponentOrder>().Add(componentOrder);
+
+                        order.Price += component.Price;
+                        component.Count -= 1;
+
+                        context.SaveChanges();
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
+            }
+        }
+
+        public static void RemoveComponentFromOrder(int orderId, int componentId)
+        {
+            using (var context = new AcreaContext(DbConst.context))
+            {
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var componentOrder = context.Set<ComponentOrder>().FirstOrDefault(co => co.OrderId == orderId && co.ComponentId == componentId);
+                        if (componentOrder != null)
+                        {
+                            context.Set<ComponentOrder>().Remove(componentOrder);
+                            var order = context.Set<Order>().Find(orderId);
+                            var component = context.Set<Component>().Find(componentId);
+                            if (order != null && component != null)
+                            {
+                                order.Price -= component.Price;
+                                component.Count += 1;
+                            }
+                            context.SaveChanges();
+                            transaction.Commit();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
+            }
+        }
+
+        public static DataTable GetComponentOrderDataTable(int orderId)
+        {
+            DataTable table = new DataTable();
+            using (var context = new AcreaContext(DbConst.context))
+            {
+                table.Columns.Add("Наименование", typeof(string));
+                table.Columns.Add("Количество", typeof(int));
+
+                var componentOrders = context.Set<ComponentOrder>()
+                    .Where(co => co.OrderId == orderId)
+                    .ToList();
+
+                foreach (var componentOrder in componentOrders)
+                {
+                    if (componentOrder != null)
+                    {
+                        var component = context.Set<Component>().Find(componentOrder.ComponentId);
+                        table.Rows.Add(component.Name, componentOrder.Count);
+                    }
+                }
+                return table;
+            }
+        }
     }
 }

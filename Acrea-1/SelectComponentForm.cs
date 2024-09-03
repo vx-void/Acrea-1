@@ -18,7 +18,7 @@ namespace ACREA
         public SelectComponentForm(int? orderId)
         {
             InitializeComponent();
-            dataGridView1.DataSource = Model.GetComponentsToDataTable();
+            dataGridView1.DataSource = DataModel.GetComponentsToDataTable();
             if (orderId != null)
                 this.OrderID = orderId;
         }
@@ -33,7 +33,7 @@ namespace ACREA
         {
 
             int selectedRowIndex = dataGridView1.SelectedRows[0].Index;
-            SelectedComponent = await Model.GetComponentByName(dataGridView1.Rows[selectedRowIndex].Cells[0].Value.ToString());
+            SelectedComponent = await DataModel.GetComponentByName(dataGridView1.Rows[selectedRowIndex].Cells[0].Value.ToString());
             DialogResult = DialogResult.OK;
             this.Close();
  
@@ -41,7 +41,7 @@ namespace ACREA
 
         private void SelectComponentForm_Load(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = Model.GetComponentsToDataTable();
+            dataGridView1.DataSource = DataModel.GetComponentsToDataTable();
         }
     }
 } 

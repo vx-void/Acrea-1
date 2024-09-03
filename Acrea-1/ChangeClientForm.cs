@@ -37,7 +37,7 @@ namespace ACREA
 
         private void ChangeClientForm_Load(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = Model.GetClientDataTable();
+            dataGridView1.DataSource = DataModel.GetClientDataTable();
         }
     }
 }

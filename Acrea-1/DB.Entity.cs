@@ -16,7 +16,7 @@ namespace DB
 
         public Client(string name, string phone)
         {
-            Id = Model.SetClientId();
+            Id = DataModel.SetClientId();
             Name = name;
             Phone = phone;     
         }

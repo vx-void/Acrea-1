@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ACREA
 {
-    public static partial class Model
+    public static partial class DataModel
     {
         //Entity: Order
         public static DataTable GetOrderDataTable()
@@ -39,7 +39,7 @@ namespace ACREA
                     row["Неисправность"] = order.Defect;
                     row["Дата приемки заказа"] = order.DateStart.ToShortDateString();
                     row["Крайний срок сдачи заказа"] = order.DateDeadline.ToShortDateString();
-                    row["Статус"] = Model.GetStatusById(order.Status);
+                    row["Статус"] = DataModel.GetStatusById(order.Status);
                     row["Стоимость заказа"] = order.Price?.ToString("F2");
 
                     dataTable.Rows.Add(row);

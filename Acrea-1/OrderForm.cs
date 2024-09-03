@@ -30,18 +30,18 @@ namespace ACREA
             {
                 this._order = order;
                 idTextBox.Text = _order.Id.ToString();
-                statusComboBox.SelectedValue = Model.GetStatusById(_order.Status);
+                statusComboBox.SelectedValue = DataModel.GetStatusById(_order.Status);
                 dateTimeStart.Value = _order.DateStart;
                 dateTimeEnd.Value = _order.DateDeadline;
                 deviceTextBox.Text = _order.Device;
-                clientNameTextBox.Text = Model.GetClientNameById(_order.Client);    ////----------------------------------------------------<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                clientPhoneTextBox.Text = Model.GetClientPhoneById(_order.Client);
+                clientNameTextBox.Text = DataModel.GetClientNameById(_order.Client);    ////----------------------------------------------------<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                clientPhoneTextBox.Text = DataModel.GetClientPhoneById(_order.Client);
                 defectTextBox.Text = _order.Defect;
                 priceTextBox.Text = (Convert.ToDouble(_order.Price) + componentsPrice).ToString();
             }
             else
             {
-                idTextBox.Text = Model.GetNextOrderId().ToString();
+                idTextBox.Text = DataModel.GetNextOrderId().ToString();
             }
         }
 
@@ -62,7 +62,7 @@ namespace ACREA
             statusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             try
             {
-                dataGridView1.DataSource = Model.GetComponentOrderDataTable(Convert.ToInt32(idTextBox.Text));
+                dataGridView1.DataSource = DataModel.GetComponentOrderDataTable(Convert.ToInt32(idTextBox.Text));
             }
             catch(NullReferenceException ex)
             {
@@ -87,8 +87,8 @@ namespace ACREA
                 {
                     if (row != null)
                     {
-                        int componentId = await Model.GetComponentIdByName(row.Cells["Наименование"].Value.ToString());
-                        Model.AddComponentToOrder(Convert.ToInt32(idTextBox.Text), Convert.ToInt32(componentId));
+                        int componentId = await DataModel.GetComponentIdByName(row.Cells["Наименование"].Value.ToString());
+                        DataModel.AddComponentToOrder(Convert.ToInt32(idTextBox.Text), Convert.ToInt32(componentId));
                     }
                 }
             }
@@ -114,12 +114,12 @@ namespace ACREA
             {
 
                 SetParameters(order);
-                Model.CreateOrder(order);
+                DataModel.CreateOrder(order);
             }
             else if (actionButton.Text == "Редактировать")
             {
                 SetParameters(order);
-                Model.UpdateOrder(order);
+                DataModel.UpdateOrder(order);
             }
 
             this.Close();
@@ -150,7 +150,7 @@ namespace ACREA
                 selectedComponents.Add(form.SelectedComponent);
                 componentsPrice += form.SelectedComponent.Price;
                 priceTextBox.Text = (Convert.ToDouble(_order.Price) + componentsPrice).ToString();
-                await Model.UpdateComponentCount(form.SelectedComponent.Id, 1, false);
+                await DataModel.UpdateComponentCount(form.SelectedComponent.Id, 1, false);
                 //-------------------------V----------------------------------------------
                 DataTable dataTable = new DataTable();
 
@@ -184,7 +184,7 @@ namespace ACREA
             componentsPrice -= selectedComponent.Price;
             priceTextBox.Text = (Convert.ToDouble(_order.Price) + componentsPrice).ToString();
 
-            Model.UpdateComponentCount(selectedComponent.Id, -1, false);
+            DataModel.UpdateComponentCount(selectedComponent.Id, -1, false);
         }
     }
 }

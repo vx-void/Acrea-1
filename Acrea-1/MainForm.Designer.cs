@@ -40,6 +40,7 @@
             groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
             clientButton = new Button();
+            phoneTextBox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -192,11 +193,20 @@
             clientButton.UseVisualStyleBackColor = true;
             clientButton.Click += clientButton_Click;
             // 
+            // phoneTextBox
+            // 
+            phoneTextBox.Location = new Point(480, 108);
+            phoneTextBox.Margin = new Padding(4, 3, 4, 3);
+            phoneTextBox.Name = "phoneTextBox";
+            phoneTextBox.Size = new Size(372, 23);
+            phoneTextBox.TabIndex = 12;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(986, 614);
+            Controls.Add(phoneTextBox);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -214,6 +224,7 @@
             groupBox2.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -230,5 +241,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button clientButton;
+        private TextBox phoneTextBox;
     }
 }

@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Alphabetical" MembersFormat="NameAndType">
+  <Class Name="ACREA.ChangeClientForm" Collapsed="true">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAACAAAEAAAACAAAACAAiIAAAAQUAEAAAAAAA=</HashCode>
+      <FileName>ChangeClientForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ACREA.ClientFrom" Collapsed="true">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAADAEAAAAAACAAAQCAEg4AAAAAHAIIAAAAAA=</HashCode>
+      <FileName>ClientFrom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ACREA.ClientManagementForm" Collapsed="true">
+    <Position X="8.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACACAAABAAAACAAAQCAAAAAAAEAQAEICAAABA=</HashCode>
+      <FileName>ClientManagementForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ACREA.DataModel">
+    <Position X="0.5" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QUAUACCEQAgQAAAAADAAgAACEAACAAQEiEABkQCQAIQ=</HashCode>
+      <FileName>ClientModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ACREA.ComponentForm" Collapsed="true">
+    <Position X="3.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAASAQABAABACACARCAAIQAAEAASCAAEAAEAA=</HashCode>
+      <FileName>ComponentForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ACREA.ComponentsListForm" Collapsed="true">
+    <Position X="6.75" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAEAIAAAACABAADAEg4AAAAAHAIAAAAAAA=</HashCode>
+      <FileName>Components.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ACREA.MainForm" Collapsed="true">
+    <Position X="5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgABAACACAAAAAAIBiAACACAAwAoAEAACAHAAAAEAg=</HashCode>
+      <FileName>MainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ACREA.OrderForm" Collapsed="true">
+    <Position X="8.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAABICACgAABEAADCAAJALAA4QISAAMGABAEAADAA=</HashCode>
+      <FileName>OrderForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ACREA.Program">
+    <Position X="2.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ACREA.SelectComponentForm">
+    <Position X="3.25" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAECAAAAAAAACAAAADAAgIAAAABAAQAAAgAAA=</HashCode>
+      <FileName>SelectComponentForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DB.DbConst">
+    <Position X="3.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAIAAQAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DB.Const.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DB.AcreaContext" Collapsed="true">
+    <Position X="1.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAEAQAAAIAAgCAAAAAAEQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DB.Client" Collapsed="true">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>DB.Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DB.ComponentType" Collapsed="true">
+    <Position X="8.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DB.Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DB.Component" Collapsed="true">
+    <Position X="1.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAAAAAAAAAAAAQAAAAAAAAAAQAAAAAAIAA=</HashCode>
+      <FileName>DB.Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DB.Order" Collapsed="true">
+    <Position X="6.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAACAAAEAQAAIgAAAAAAAAAAAQAAAABAQAAAAAAAAAQ=</HashCode>
+      <FileName>DB.Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DB.ComponentOrder" Collapsed="true">
+    <Position X="5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAABACAAAAAA=</HashCode>
+      <FileName>DB.Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DB.Status">
+    <Position X="6.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DB.Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

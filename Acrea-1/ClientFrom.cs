@@ -18,7 +18,7 @@ namespace ACREA
         public ClientFrom()
         {
             InitializeComponent();
-            dataGridView1.DataSource = Model.GetClientDataTable();
+            dataGridView1.DataSource = DataModel.GetClientDataTable();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -28,7 +28,7 @@ namespace ACREA
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ClientAMD form = new ClientAMD(button1.Text);
+            ClientManagementForm form = new ClientManagementForm(button1.Text);
             form.ShowDialog();
             //dataGridView1.DataSource = DB.DataBase.GetDataTable(DB.SqlQueries.selectClient);
 
@@ -39,9 +39,9 @@ namespace ACREA
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 SetClientNameAndPhone();
-                ClientAMD form = new ClientAMD(button2.Text, Name, Phone);
+                ClientManagementForm form = new ClientManagementForm(button2.Text, Name, Phone);
                 form.ShowDialog();
-                dataGridView1.DataSource = Model.GetClientDataTable(); 
+                dataGridView1.DataSource = DataModel.GetClientDataTable(); 
             }
         }
 
@@ -63,11 +63,11 @@ namespace ACREA
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 SetClientNameAndPhone();
-                int id = await Model.GetClientIdByPhone(Phone);
+                int id = await DataModel.GetClientIdByPhone(Phone);
                 var result = MessageBox.Show("Вы хотите удалить клиента?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
-                    await Model.DeleteClient(id);
-                dataGridView1.DataSource = dataGridView1.DataSource = Model.GetClientDataTable();
+                    await DataModel.DeleteClient(id);
+                dataGridView1.DataSource = dataGridView1.DataSource = DataModel.GetClientDataTable();
             }
         }
 

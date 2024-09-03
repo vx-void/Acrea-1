@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ACREA
 {
-    public static partial class Model
+    public static partial class DataModel
     {
         //Entity: Component
         public static DataTable GetComponentsToDataTable()

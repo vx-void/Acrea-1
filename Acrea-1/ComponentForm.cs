@@ -33,7 +33,7 @@ namespace ACREA
 
         private async void Part_Load(object sender, EventArgs e)
         {
-            ComponentType = await Model.GetComponentTypeFromDB();
+            ComponentType = await DataModel.GetComponentTypeFromDB();
 
 
             //partType = Model.GetPartTypeDict(DB.DataBase.GetPartTypeList());
@@ -45,7 +45,7 @@ namespace ACREA
             if (this.Name != "" && Type != 0 && Count != 0 && Price !=0)
             {                         
                 componentNameTextBox.Text = this.Name;
-                componentTypeComboBox.Text = await Model.GetComponentTypeName(this.Type);
+                componentTypeComboBox.Text = await DataModel.GetComponentTypeName(this.Type);
                 componentCountTextBox.Text = this.Count.ToString();
                 componentPriceTextBox.Text = this.Price.ToString();
             }
@@ -55,17 +55,17 @@ namespace ACREA
         private async void actionButton_Click(object sender, EventArgs e)
         {
             int componentID;
-            int componentType = await Model.GetComponentTypeID(componentTypeComboBox.Text.ToString());
+            int componentType = await DataModel.GetComponentTypeID(componentTypeComboBox.Text.ToString());
             switch (actionButton.Text)
             {
                 
                 case "Добавить":
-                    componentID = await Model.SetComponentId() + 1;
-                    await Model.InsertComponent(componentID, componentNameTextBox.Text.ToString(), componentType, int.Parse(componentCountTextBox.Text), double.Parse(componentPriceTextBox.Text));
+                    componentID = await DataModel.SetComponentId() + 1;
+                    await DataModel.InsertComponent(componentID, componentNameTextBox.Text.ToString(), componentType, int.Parse(componentCountTextBox.Text), double.Parse(componentPriceTextBox.Text));
                     break;
                 case "Редактировать":
-                    componentID = await Model.GetComponentIdByName(this.Name);
-                    await Model.UpdateComponent(componentID, this.Name, componentType, 
+                    componentID = await DataModel.GetComponentIdByName(this.Name);
+                    await DataModel.UpdateComponent(componentID, this.Name, componentType, 
                         int.Parse(componentCountTextBox.Text), 
                         double.Parse(componentPriceTextBox.Text));
 

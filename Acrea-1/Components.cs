@@ -46,12 +46,12 @@ namespace ACREA
             {
                 int selectedRowIndex = dataGridView1.SelectedRows[0].Index;
                 var name = dataGridView1.Rows[selectedRowIndex].Cells[0].Value.ToString();
-                var type = await Model.GetComponentTypeID(dataGridView1.Rows[selectedRowIndex].Cells[1].Value.ToString());
+                var type = await DataModel.GetComponentTypeID(dataGridView1.Rows[selectedRowIndex].Cells[1].Value.ToString());
                 var count = int.Parse(dataGridView1.Rows[selectedRowIndex].Cells[2].Value.ToString());
                 var price = double.Parse(dataGridView1.Rows[selectedRowIndex].Cells[3].Value.ToString());
                 var componentForm = new ComponentForm("Редактировать", name, type, count, price);
                 componentForm.ShowDialog();
-                dataGridView1.DataSource = Model.GetComponentsToDataTable();
+                dataGridView1.DataSource = DataModel.GetComponentsToDataTable();
             }
         }
 
@@ -65,7 +65,7 @@ namespace ACREA
         private void Components_Load(object sender, EventArgs e)
         {
             //dataGridView1.DataSource = DB.DataBase.GetDataTable(DB.SqlQueries.selectPart);
-            dataGridView1.DataSource =  Model.GetComponentsToDataTable();
+            dataGridView1.DataSource =  DataModel.GetComponentsToDataTable();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -85,9 +85,9 @@ namespace ACREA
                  var result = MessageBox.Show("Удалить выбранный компонент?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    await Model.DeleteComponent(selectedRowIndex);
+                    await DataModel.DeleteComponent(selectedRowIndex);
                 }
-                dataGridView1.DataSource = Model.GetComponentsToDataTable();
+                dataGridView1.DataSource = DataModel.GetComponentsToDataTable();
             }
         }
     }

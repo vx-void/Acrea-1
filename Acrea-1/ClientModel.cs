@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ACREA
 {
-    public static partial class Model
+    public static partial class DataModel
     {
         //Entity:Client
         public static string GetPhoneNumberFormat(string number)

@@ -15,7 +15,7 @@ namespace ACREA
         [STAThread]
         static void Main()
         {
-            Model.DbIsExist();
+            DataModel.DbIsExist();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

@@ -7,6 +7,9 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+	<PublishSingleFile>true</PublishSingleFile>
+	<SelfContained>true</SelfContained>
+	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ClientAMD.cs">
+    <Compile Update="ClientManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ClientFrom.cs">
@@ -28,9 +31,7 @@
     <Compile Update="Components.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="MainForm.cs" />
     <Compile Update="OrderForm.cs">
       <SubType>Form</SubType>
     </Compile>

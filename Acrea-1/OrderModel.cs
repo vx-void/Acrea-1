@@ -87,8 +87,7 @@ namespace ACREA
 
             }
         }
-
-        public static void AddComponentToOrder(int orderId, int componentId)
+        public static async Task AddComponentToOrder(int orderId, int componentId)
         {
             using (var context = new AcreaContext(DbConst.context))
             {
@@ -96,13 +95,22 @@ namespace ACREA
                 {
                     try
                     {
-                        var order = context.Set<Order>().Find(orderId);
-                        var component = context.Set<Component>().Find(componentId);
+                        var order = await context.Set<Order>().FirstOrDefaultAsync(o => o.Id == orderId);
+                        var component = await context.Set<Component>().FirstOrDefaultAsync(c => c.Id == componentId);
 
-                        if (order == null || component == null)
+                        if (order == null)
                         {
-                            //throw new InvalidOperationException("Order or component not found");
-                            MessageBox.Show("Заказ или компонент не найдены!");
+                            throw new InvalidOperationException($"Order with ID {orderId} not found.");
+                        }
+
+                        if (component == null)
+                        {
+                            throw new InvalidOperationException($"Component with ID {componentId} not found.");
+                        }
+
+                        if (component.Count <= 0)
+                        {
+                            throw new InvalidOperationException($"Component {component.Name} is out of stock.");
                         }
 
                         var componentOrder = new ComponentOrder
@@ -117,8 +125,7 @@ namespace ACREA
                         order.Price += component.Price;
                         component.Count -= 1;
 
-                        context.SaveChanges();
-
+                        await context.SaveChangesAsync();
                         transaction.Commit();
                     }
                     catch (Exception ex)
@@ -129,6 +136,55 @@ namespace ACREA
                 }
             }
         }
+        //        public static async Task AddComponentToOrder(int orderId, int componentId)
+        //{
+        //    using (var context = new AcreaContext(DbConst.context))
+        //    {
+        //        using (var transaction = context.Database.BeginTransaction())
+        //        {
+        //            try
+        //            {
+        //                var order = await context.Set<Order>().FirstOrDefaultAsync(o => o.Id == orderId);
+        //                var component = await context.Set<Component>().FirstOrDefaultAsync(c => c.Id == componentId);
+
+        //                if (order == null)
+        //                {
+        //                    throw new InvalidOperationException($"Order with ID {orderId} not found.");
+        //                }
+
+        //                if (component == null)
+        //                {
+        //                    throw new InvalidOperationException($"Component with ID {componentId} not found.");
+        //                }
+
+        //                if (component.Count <= 0)
+        //                {
+        //                    throw new InvalidOperationException($"Component {component.Name} is out of stock.");
+        //                }
+
+        //                var componentOrder = new ComponentOrder
+        //                {
+        //                    OrderId = orderId,
+        //                    ComponentId = componentId,
+        //                    Count = 1
+        //                };
+
+        //                context.Set<ComponentOrder>().Add(componentOrder);
+
+        //                order.Price += component.Price;
+        //                component.Count -= 1;
+
+        //                await context.SaveChangesAsync();
+        //                transaction.Commit();
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                transaction.Rollback();
+        //                throw;
+        //            }
+        //        }
+        //    }
+        //}
 
         public static void RemoveComponentFromOrder(int orderId, int componentId)
         {
@@ -165,25 +221,43 @@ namespace ACREA
         public static DataTable GetComponentOrderDataTable(int orderId)
         {
             DataTable table = new DataTable();
+            table.Columns.Add("Наименование", typeof(string));
+            table.Columns.Add("Количество", typeof(int));
             using (var context = new AcreaContext(DbConst.context))
             {
-                table.Columns.Add("Наименование", typeof(string));
-                table.Columns.Add("Количество", typeof(int));
-
                 var componentOrders = context.Set<ComponentOrder>()
                     .Where(co => co.OrderId == orderId)
                     .ToList();
-
+                //if (componentOrders.Count == 0)
+                //{
+                //    var newComponentOrder = new ComponentOrder
+                //    {
+                //        OrderId = orderId,
+                //        ComponentId = 0,
+                //        Count = 0
+                //    };
+                //    context.Set<ComponentOrder>().Add(newComponentOrder);
+                //    context.SaveChanges();
+                //    componentOrders.Add(newComponentOrder);
+                //}
+                if (componentOrders.Count == 0)
+                {
+                    return table; 
+                }
                 foreach (var componentOrder in componentOrders)
                 {
-                    if (componentOrder != null)
+                    var component = context.Set<Component>().Find(componentOrder.ComponentId);
+                    if (component != null)
                     {
-                        var component = context.Set<Component>().Find(componentOrder.ComponentId);
                         table.Rows.Add(component.Name, componentOrder.Count);
                     }
+                    else
+                    {
+                        table.Rows.Add("Неизвестный компонент", componentOrder.Count);
+                    }
                 }
-                return table;
             }
+            return table;
         }
     }
 }
